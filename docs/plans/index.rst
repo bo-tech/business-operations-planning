@@ -2,11 +2,10 @@
 Plans
 =====
 
-Month-level planning documents.
+Month-level planning documents: ``YYYY-MM-plan.md``
 
-Naming convention: ``YYYY-MM-plan.md`` — e.g., ``2026-02-plan.md``
-
-Purpose:
+Purpose
+-------
 
 - Direction without micromanagement
 - Bridges results and sprint execution
