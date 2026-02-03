@@ -12,6 +12,8 @@ Started: 2026-02-03
 - [ ] Extract Minisforum hardware configs from infrastructure/nixos/hardware/
 - [ ] Create initial flake.nix exposing NixOS hardware modules
 - [ ] Verify hardware modules work when imported from external flake
+- [ ] Experiment: explore multi-repo approaches for Flux/Kustomize layer
+- [ ] Experiment: try out most promising approaches with VolSync templates
 
 *** Backlog
 
