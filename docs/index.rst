@@ -21,6 +21,7 @@ Planning
    :caption: Process
 
    process/README
+   process/repository-structure
 
 .. toctree::
    :maxdepth: 2
