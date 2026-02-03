@@ -12,7 +12,7 @@ planning/
 │   ├── decision-backlog/   # Pending decisions
 │   ├── plans/              # Month-level plans
 │   ├── process/            # How planning works
-│   └── milestone-*/        # Milestone-specific planning
+│   └── results/            # What we're working toward
 ├── sprints/                # Sprint files
 └── notes/                  # Working notes
 ```
@@ -41,10 +41,10 @@ micromanagement, bridges vision and sprint execution.
 
 How planning and execution works. Onboarding material for collaborators.
 
-### `docs/milestone-*/`
+### `docs/results/`
 
-Planning documents for specific milestones. Each milestone folder contains
-overview, goals, and relevant details.
+What we're working toward. Each result describes an outcome — the end state,
+not the plan to get there. Helps alignment without micromanagement.
 
 ### `sprints/`
 

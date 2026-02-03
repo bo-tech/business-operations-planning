@@ -4,10 +4,9 @@ Planning
 
 .. toctree::
    :maxdepth: 2
-   :caption: Milestones
+   :caption: Results
 
-   milestone-0/overview
-   milestone-0/sanitization
+   results/public-release
 
 .. toctree::
    :maxdepth: 2
