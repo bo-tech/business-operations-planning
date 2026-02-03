@@ -20,19 +20,19 @@ planning/
 
 ## Sections
 
-### [`docs/decisions/`](../decisions/README.md)
+### `docs/decisions/`
 
 Architecture Decision Records (ADRs). Immutable once accepted — new ADRs
 supersede old ones rather than editing.
 
-### [`docs/decision-backlog/`](../decision-backlog/README.md)
+### `docs/decision-backlog/`
 
 Decisions needed eventually, but not now. Each file captures context, options,
 and a trigger for when to decide.
 
 Workflow: capture → forget → revisit when triggered → create ADR.
 
-### [`docs/plans/`](../plans/README.md)
+### `docs/plans/`
 
 Month-level planning documents (`YYYY-MM-plan.md`). Provides direction without
 micromanagement, bridges vision and sprint execution.
@@ -41,15 +41,17 @@ micromanagement, bridges vision and sprint execution.
 
 How planning and execution works. Onboarding material for collaborators.
 
-### [`docs/milestone-*/`](../milestone-0/overview.md)
+### `docs/milestone-*/`
 
 Planning documents for specific milestones. Each milestone folder contains
 overview, goals, and relevant details.
 
-### [`sprints/`](../../sprints/sprint-file-spec.org)
+### `sprints/`
 
 Sprint files for execution. A sprint is a small chunk of work — could be 2
 focused days or a few weeks as a side project.
+
+Format documented in `sprints/sprint-file-spec.org`.
 
 ### `notes/`
 
