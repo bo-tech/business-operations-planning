@@ -1,5 +1,7 @@
 * Sprint 1: Initial business-operations Structure
 
+Started: 2026-02-03
+
 ** Plan
 
 - [ ] Create directory structure in business-operations repository
