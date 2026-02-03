@@ -7,6 +7,8 @@ Started: 2026-02-03
 - [ ] Create directory structure in business-operations repository
 - [ ] Publish sphinx-builder to GitHub/bo-tech
 - [ ] Extract ADRs from b-ops docs/decisions/ (modify titles to include ADR ID)
+- [ ] Assess remaining docs: categorize as business-operations / demo-ops / b-ops
+- [ ] Extract public documentation to business-operations
 - [ ] Extract Minisforum hardware configs from infrastructure/nixos/hardware/
 - [ ] Create initial flake.nix exposing NixOS hardware modules
 - [ ] Verify hardware modules work when imported from external flake
