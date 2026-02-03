@@ -1,7 +1,7 @@
 # Planning
 
 Planning and coordination repository for the Business Operations infrastructure
-project (Sovereign Business Box).
+project.
 
 This repository contains:
 
