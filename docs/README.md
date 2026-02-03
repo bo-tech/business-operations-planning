@@ -40,11 +40,3 @@ The CI pipeline automatically:
 
 - Builds and validates docs on merge requests
 - Publishes to GitLab Pages on pushes to main branch
-
-## Architecture Decision Records
-
-ADRs are stored in `docs/decisions/`. To create a new ADR:
-
-1. Copy `decisions/adr-template.md` to `decisions/NNNN-short-title.md`
-2. Fill in the template sections
-3. The decision log will automatically include it
