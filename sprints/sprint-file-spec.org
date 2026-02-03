@@ -1,0 +1,113 @@
+* Sprint File Specification
+
+** Naming
+
+=YYYY-MM-DD sprint NN.org= — date is sprint start.
+
+** Structure
+
+Sprint files follow this section order:
+
+#+begin_src org
+,* Sprint N: Title
+
+,** Plan
+
+- [ ] Task 1
+- [ ] Task 2
+- [ ] Task 3
+
+,** Focus
+
+One sentence describing what this sprint is about.
+
+,** Checkpoint
+
+"Question that validates sprint success?"
+
+,** Notes
+
+,** Learnings and Insights
+
+,** Closing Status
+#+end_src
+
+** Constraints
+
+*** Plan section
+
+- Flat list of tasks (no nesting, no sub-sections)
+- Located at the top, immediately after the title
+- Each task is a checkbox: =- [ ] Task description=
+- Keep tasks concrete and actionable
+
+*** Focus section
+
+- One sentence or short paragraph
+- Describes the sprint's primary objective
+
+*** Checkpoint section
+
+- Phrased as a question
+- Answerable with yes/no at sprint end
+- Validates whether the sprint achieved its goal
+
+*** Notes section
+
+- Technical notes discovered during sprint
+- Can have sub-sections as needed
+- Temporary capture — process during daily review
+
+*** Learnings and Insights section
+
+- What we learned during the sprint
+- Can have sub-sections with dates
+- Permanent record — important findings stay here
+
+*** Weekly Review section (optional)
+
+- Added after each Friday during longer sprints
+- Answers the weekly checkpoint questions:
+  1. What works now that didn't work Monday?
+  2. What's the biggest obstacle for next week?
+  3. Am I still excited about this?
+  4. Does the original thesis still hold?
+
+*** Closing Status section
+
+- Filled at sprint end
+- Contains: Outcome, What works, What needs improvement, Key insights, Stats
+- Stats include: Started, Closed, Duration
+
+** Sprint as Working Memory
+
+The sprint file is working memory during a sprint:
+- Flat task list for current sprint
+- Capture insights/ideas as they come (messy is fine)
+- Rework freely as reality changes
+- Temporary — processed daily, archived at sprint end
+
+** Daily Review (5-10 min)
+
+At least once per day, or after significant learnings:
+- Process sprint notes
+- Move insights to permanent docs (methodology, decisions, etc.)
+- Move ideas to idea backlog or decision backlog
+- Cross off done items
+
+Without the review step, sprint logs become graveyards of forgotten learnings.
+
+** Lifecycle
+
+1. Create sprint file with Plan, Focus, Checkpoint (empty other sections)
+2. Work through tasks, add notes as discovered
+3. Mark tasks done, capture learnings
+4. Close sprint with Closing Status
+5. Tag repos with =sprint-NN=
+
+** Anti-patterns
+
+- Nested task lists in Plan (use flat list)
+- Multiple focus areas (one sprint = one focus)
+- Vague checkpoints ("Did we make progress?")
+- Forgetting to add Stats at closing
