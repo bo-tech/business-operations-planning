@@ -1,16 +1,24 @@
 # Planning
 
-TODO: Describe your prodject
+Planning and coordination repository for the Business Operations infrastructure
+project (Sovereign Business Box).
+
+This repository contains:
+
+- Architecture Decision Records (ADRs) for planning decisions
+- Task breakdowns and milestone tracking
+- Design documents and technical specifications
 
 
 ## Status - Experimental
 
-TODO: Provide a status hint, something from Experimental, Beta, Stable, Unmaintained or Archived
+Active planning phase for Milestone 0 (make current state public).
 
 
-## Example Usage
+## Related Repositories
 
-TODO: Provide an example of the most common way of using this
+- **b-ops**: Production infrastructure (private)
+- **business-operations**: Public open-source target
 
 
 ## Contact
