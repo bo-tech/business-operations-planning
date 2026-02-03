@@ -8,7 +8,7 @@ Started: 2026-02-03
 - [X] Publish ~sphinx-builder~ to GitHub/bo-tech
 - [X] Publish ~default-repository~ template to GitHub/bo-tech
 - [X] Update ~default-repository~ template (sphinx-builder URL to GitHub)
-- [ ] Create ~business-operations~ repository using the template
+- [X] Create ~business-operations~ repository using the template
 - [ ] Extract ADRs from ~b-ops~ docs/decisions/ (modify titles to include ADR ID)
 - [ ] Assess remaining docs: categorize as ~business-operations~ / ~demo-ops~ / ~b-ops~
 - [ ] Extract public documentation to ~business-operations~
