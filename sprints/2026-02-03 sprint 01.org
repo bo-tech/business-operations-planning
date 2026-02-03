@@ -5,7 +5,7 @@ Started: 2026-02-03
 ** Plan
 
 - [X] Assess repository structure and work out how to split the public part out
-- [ ] Publish ~sphinx-builder~ to GitHub/bo-tech
+- [X] Publish ~sphinx-builder~ to GitHub/bo-tech
 - [ ] Update ~default-repository~ template (sphinx-builder URL to GitHub)
 - [ ] Publish ~default-repository~ template to GitHub/bo-tech
 - [ ] Create ~business-operations~ repository using the template
