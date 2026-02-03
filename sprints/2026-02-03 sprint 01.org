@@ -10,6 +10,10 @@ Started: 2026-02-03
 - [ ] Create initial flake.nix exposing NixOS hardware modules
 - [ ] Verify hardware modules work when imported from external flake
 
+*** Backlog
+
+- [ ] Update secrets handling documentation when working on demo-ops
+
 ** Focus
 
 Establish business-operations repository with first low-risk extractions to
