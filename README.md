@@ -10,11 +10,6 @@ This repository contains:
 - Design documents and technical specifications
 
 
-## Status - Experimental
-
-Active planning phase for Milestone 0 (make current state public).
-
-
 ## Related Repositories
 
 - **b-ops**: Production infrastructure (private)
