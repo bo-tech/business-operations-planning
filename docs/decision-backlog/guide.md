@@ -1,18 +1,24 @@
-# Decision Backlog
+# Guide
 
-Decisions that need to be made eventually, but not now.
+How to use the decision backlog.
 
-Each file captures:
+
+## File Structure
+
+Each decision file captures:
+
 - Context: Why this decision matters
 - Options: What we're choosing between
 - Current thinking: Most likely approach
 - Decision trigger: When to decide
+
 
 ## Naming Convention
 
 `<category>-<keywords>.md`
 
 Categories: architecture, process, tooling, scope
+
 
 ## Workflow
 
@@ -21,4 +27,4 @@ Categories: architecture, process, tooling, scope
 3. Forget about it (system remembers)
 4. Revisit when trigger condition met
 5. Create ADR in `decisions/`
-6. Move file to decided list or delete
+6. Remove file from backlog
