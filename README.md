@@ -18,4 +18,4 @@ This repository contains:
 
 ## Contact
 
-joh@bo-tech.de
+<joh@bo-tech.de>
