@@ -1,0 +1,24 @@
+* Sprint 1: Initial business-operations Structure
+
+** Plan
+
+- [ ] Create directory structure in business-operations repository
+- [ ] Extract ADRs from b-ops docs/decisions/ (public-safe, no secrets)
+- [ ] Extract Minisforum hardware configs from infrastructure/nixos/hardware/
+- [ ] Create initial flake.nix exposing NixOS hardware modules
+- [ ] Verify hardware modules work when imported from external flake
+
+** Focus
+
+Establish business-operations repository with first low-risk extractions to
+validate the multi-repo approach.
+
+** Checkpoint
+
+"Can a NixOS configuration import hardware modules from business-operations?"
+
+** Notes
+
+** Learnings and Insights
+
+** Closing Status
