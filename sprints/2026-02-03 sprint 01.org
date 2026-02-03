@@ -4,6 +4,7 @@ Started: 2026-02-03
 
 ** Plan
 
+- [X] Assess repository structure and work out how to split the public part out
 - [ ] Create directory structure in ~business-operations~ repository
 - [ ] Publish ~sphinx-builder~ to GitHub/bo-tech
 - [ ] Extract ADRs from ~b-ops~ docs/decisions/ (modify titles to include ADR ID)
