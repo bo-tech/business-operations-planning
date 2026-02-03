@@ -5,7 +5,7 @@ project.
 
 This repository contains:
 
-- Architecture Decision Records (ADRs) for planning decisions
+- Any Decision Records (ADRs) for planning decisions
 - Task breakdowns and milestone tracking
 - Design documents and technical specifications
 

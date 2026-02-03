@@ -8,3 +8,4 @@ How planning and execution works.
    :maxdepth: 2
 
    repository-structure
+   decision-backlog-guide

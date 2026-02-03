@@ -1,4 +1,4 @@
-# Guide
+# Decision Backlog Guide
 
 How to use the decision backlog.
 
