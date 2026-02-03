@@ -23,6 +23,8 @@ Started: 2026-02-03
 
 - [ ] Update secrets handling documentation when working on ~demo-ops~
 - [ ] Consider submitting hardware modules to nixos-hardware
+- [ ] Extract Ansible roles to ~business-operations~ (Nix-centric integration via devShell)
+- [ ] Log ADR: Nix-centric dependency management for Ansible roles
 
 ** Focus
 
