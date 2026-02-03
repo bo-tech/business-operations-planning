@@ -4,6 +4,12 @@ Planning
 
 .. toctree::
    :maxdepth: 2
+   :caption: About
+
+   about
+
+.. toctree::
+   :maxdepth: 2
    :caption: Results
 
    results/public-release
