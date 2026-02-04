@@ -10,11 +10,6 @@ Started: 2026-02-03
 - [X] Update ~default-repository~ template (sphinx-builder URL to GitHub)
 - [X] Create ~business-operations~ repository using the template
 - [X] Extract ADRs from ~b-ops~ docs/decisions/ (modify titles to include ADR ID)
-- [ ] Assess remaining docs: categorize as ~business-operations~ / ~demo-ops~ / ~b-ops~
-- [ ] Consider: Put a ~demo-ops~ repo already up to collect docs which belong there
-- [ ] Extract public documentation to ~business-operations~
-- [ ] Build and publish documentation
-- [ ] ~demo-ops~ and ~b-ops~ should be able to refer back to the documentation
 - [ ] Extract Minisforum hardware configs from infrastructure/nixos/hardware/
   - aim for nixos-hardware, add into fork and use from fork, then submit upstream
 - [ ] Create initial flake.nix exposing NixOS hardware modules
@@ -22,6 +17,11 @@ Started: 2026-02-03
 - [ ] Parameterize k0s-node modules (SSH keys, DNS as inputs)
 - [ ] Extract parameterized NixOS modules to ~business-operations~
 - [ ] Update ~b-ops~ flake to use modules from ~business-operations~
+- [ ] Assess remaining docs: categorize as ~business-operations~ / ~demo-ops~ / ~b-ops~
+- [ ] Consider: Put a ~demo-ops~ repo already up to collect docs which belong there
+- [ ] Extract public documentation to ~business-operations~
+- [ ] Build and publish documentation
+- [ ] ~demo-ops~ and ~b-ops~ should be able to refer back to the documentation
 - [ ] Create minimal ~demo-ops~ using ~business-operations~ NixOS modules
 - [ ] Experiment: explore multi-repo approaches for Flux/Kustomize layer
 - [ ] Experiment: try out most promising approaches with VolSync templates
@@ -29,6 +29,8 @@ Started: 2026-02-03
 
 *** Backlog
 
+- [ ] Document known limitations or similar
+  - [ ] Need to select and update per app instead of the whole thing
 - [ ] Update secrets handling documentation when working on ~demo-ops~
 - [ ] Consider submitting hardware modules to nixos-hardware
 - [ ] Extract Ansible roles to ~business-operations~ (Nix-centric integration via devShell)
