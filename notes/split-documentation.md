@@ -6,8 +6,8 @@ Analysis date: 2026-02-03
 
 This layer covers Sphinx documentation, ADRs, and operational guides.
 
-- **ADRs**: Extract to business-operations, modify titles to include ADR ID
-- **sphinx-builder**: Will be published to GitHub/bo-tech (unblocks docs build)
+- **ADRs**: Done - extracted to `business-operations` with cross-reference labels and ID prefixes
+- **sphinx-builder**: Done - published to GitHub/bo-tech
 - **Other docs**: Assess and categorize (`business-operations` / `demo-ops` / `b-ops`), then extract public docs
 
 ## Current Structure
@@ -146,7 +146,7 @@ b-ops extends with site-specific content.
 
 ## Recommended First Steps
 
-1. Publish sphinx-builder to GitHub/bo-tech
-2. Copy all ADRs to `business-operations` (modify titles to include ADR ID)
+1. Done - Publish sphinx-builder to GitHub/bo-tech
+2. Done - Copy all ADRs to `business-operations` (modify titles to include ADR ID)
 3. Assess remaining docs: categorize as `business-operations` / `demo-ops` / `b-ops`
 4. Extract public documentation to `business-operations`
