@@ -11,8 +11,10 @@ Started: 2026-02-03
 - [X] Create ~business-operations~ repository using the template
 - [X] Extract ADRs from ~b-ops~ docs/decisions/ (modify titles to include ADR ID)
 - [ ] Assess remaining docs: categorize as ~business-operations~ / ~demo-ops~ / ~b-ops~
+- [ ] Consider: Put a ~demo-ops~ repo already up to collect docs which belong there
 - [ ] Extract public documentation to ~business-operations~
 - [ ] Extract Minisforum hardware configs from infrastructure/nixos/hardware/
+  - aim for nixos-hardware, add into fork and use from fork, then submit upstream
 - [ ] Create initial flake.nix exposing NixOS hardware modules
 - [ ] Verify hardware modules work when imported from external flake
 - [ ] Parameterize k0s-node modules (SSH keys, DNS as inputs)
