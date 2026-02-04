@@ -13,6 +13,8 @@ Started: 2026-02-03
 - [ ] Assess remaining docs: categorize as ~business-operations~ / ~demo-ops~ / ~b-ops~
 - [ ] Consider: Put a ~demo-ops~ repo already up to collect docs which belong there
 - [ ] Extract public documentation to ~business-operations~
+- [ ] Build and publish documentation
+- [ ] ~demo-ops~ and ~b-ops~ should be able to refer back to the documentation
 - [ ] Extract Minisforum hardware configs from infrastructure/nixos/hardware/
   - aim for nixos-hardware, add into fork and use from fork, then submit upstream
 - [ ] Create initial flake.nix exposing NixOS hardware modules
