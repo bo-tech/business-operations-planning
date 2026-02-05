@@ -17,9 +17,13 @@ Started: 2026-02-03
 - [X] Update machines to verify everything sill works
 - [X] Verify hardware modules work when imported from external flake
   - from ~nixos-hardware~
-- [ ] Extract first NixOS modules to ~business-operations~ and create a base
+- [X] Extract first NixOS modules to ~business-operations~ and create a base
   profile.
-- [ ] Use in ~b-ops~ for the ~test-vm~ node.
+  - nix/flakes.nix, nix/registry.nix, base-packages.nix
+  - profiles/base.nix composing them
+  - ADR 0017 documents the layering approach
+- [X] Use in ~b-ops~ for the ~test-vm~ node.
+  - Verified: flakes enabled, registry has nixpkgs + business-operations + b-ops
 - [ ] Put a ~demo-ops~ repo up and have a test VM in there using the
   ~business-operations~ profile.
 - [ ] Extract public documentation to ~business-operations~
