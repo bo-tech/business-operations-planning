@@ -32,6 +32,9 @@ Started: 2026-02-03
 - [ ] Experiment: explore multi-repo approaches for Flux/Kustomize layer
 - [ ] Experiment: try out most promising approaches with VolSync templates
 - [ ] Experiment: explore Taskfile pattern for cluster tasks (push to internal Gitea)
+- [ ] review - Flakes can provide templates, maybe a template could be provided
+  to create an instance of the setup?
+  - check if templates also support updating like e.g. ~copier~ does
 
 *** Backlog
 
