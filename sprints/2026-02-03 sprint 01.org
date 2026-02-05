@@ -22,8 +22,7 @@ Started: 2026-02-03
   - nix/flakes.nix, nix/registry.nix, base-packages.nix
   - profiles/base.nix composing them
   - ADR 0017 documents the layering approach
-- [X] Use in ~b-ops~ for the ~test-vm~ node.
-  - Verified: flakes enabled, registry has nixpkgs + business-operations + b-ops
+- [X] Use in ~b-ops~ for all machines.
 - [ ] Put a ~demo-ops~ repo up and have a test VM in there using the
   ~business-operations~ profile.
 - [ ] Extract public documentation to ~business-operations~
@@ -63,5 +62,9 @@ validate the multi-repo approach.
 ** Notes
 
 ** Learnings and Insights
+
+- Local development: use ~--override-input business-operations path:...~ for testing
+- Container images need ~system.installer.channel.enable = false~ to avoid registry
+  conflict with profile-base (channel.nix sets nixpkgs registry for offline use)
 
 ** Closing Status
