@@ -25,6 +25,8 @@ Started: 2026-02-03
 - [X] Use in ~b-ops~ for all machines.
 - [X] Move ansible part over
 - [X] Prepare environment with all dependencies for the ansible runs
+- [X] Extract Ansible roles to ~business-operations~ (Nix-centric integration via devShell)
+- [X] Log ADR: Nix-centric dependency management for Ansible roles (ADR-0018)
 - [ ] Put a ~demo-ops~ repo up and have a test VM in there using the
   ~business-operations~ profile.
 - [ ] Extract public documentation to ~business-operations~
@@ -45,8 +47,6 @@ Started: 2026-02-03
   - [ ] Need to select and update per app instead of the whole thing
 - [ ] Update secrets handling documentation when working on ~demo-ops~
 - [ ] Consider submitting hardware modules to nixos-hardware
-- [X] Extract Ansible roles to ~business-operations~ (Nix-centric integration via devShell)
-- [X] Log ADR: Nix-centric dependency management for Ansible roles (ADR-0018)
 - [ ] Document WOL/shutdown task pattern for cluster management
 - [ ] Document cluster task patterns (push, info, forward-gitea)
 - [ ] Remove unused tasks from ~b-ops~ (trigger-backup, k3s-*, bootstrap)
