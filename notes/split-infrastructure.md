@@ -248,33 +248,14 @@ happen later. Focus on simplest possible split while staying working.
 4. Update `b-ops` to use the parameterized modules
 5. Create minimal `demo-ops` using the modules (validates extraction)
 
-**Phase 3: Extract Ansible roles** (later)
+**Phase 3: Extract Ansible roles** (done - 2026-02-06, ADR-0018)
 
-1. Create `infrastructure/ansible/roles/` in `business-operations`
-2. Abstract paths in deploy_cilium/openebs (use variables)
-3. Keep inventory files private in `b-ops`
+Roles and playbooks extracted to `business-operations/ansible/`. Helm roles
+parameterized with configurable paths (defaulting to cluster-0 as reference).
+b-ops ansible directory reduced to inventories and artifacts only.
 
-**Ansible integration approach**: Use Nix-centric dependency management.
-
-The `business-operations` flake input provides everything. A devShell sets
-`ANSIBLE_ROLES_PATH` to the flake input path:
-
-```nix
-devShells.default = pkgs.mkShell {
-  shellHook = ''
-    export ANSIBLE_ROLES_PATH="${inputs.bo}/infrastructure/ansible/roles"
-  '';
-};
-```
-
-For development on the roles themselves, override the environment variable to
-point to a local checkout (like Python editable install):
-
-```bash
-export ANSIBLE_ROLES_PATH="../business-operations/infrastructure/ansible/roles"
-```
-
-This avoids multiple dependency mechanisms (flake + requirements.yml + submodule).
+Consuming repositories use `nix develop github:bo-tech/business-operations#ansible`
+which provides tools and sets `ANSIBLE_ROLES_PATH` and `BO_PLAYBOOKS`.
 
 ## Backlog
 
