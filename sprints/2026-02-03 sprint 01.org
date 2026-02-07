@@ -27,8 +27,11 @@ Started: 2026-02-03
 - [X] Prepare environment with all dependencies for the ansible runs
 - [X] Extract Ansible roles to ~business-operations~ (Nix-centric integration via devShell)
 - [X] Log ADR: Nix-centric dependency management for Ansible roles (ADR-0018)
-- [ ] Put a ~demo-ops~ repo up and have a test VM in there using the
+- [X] Put a ~demo-ops~ repo up and have a test VM in there using the
   ~business-operations~ profile.
+- [ ] review - check if nixos based testing can be used in demo-ops, compare k0s-nix
+- [ ] review - the key generation and handling in ~demo-ops~ is just hacked in,
+  needs a more solid solution.
 - [ ] Extract public documentation to ~business-operations~
 - [ ] Build and publish documentation
 - [ ] ~demo-ops~ and ~b-ops~ should be able to refer back to the documentation
