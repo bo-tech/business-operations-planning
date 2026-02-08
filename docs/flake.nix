@@ -2,8 +2,7 @@
   description = "Planning documentation build using sphinx-builder";
 
   inputs = {
-    sphinx-builder.url =
-      "git+https://gitlab.gitlab.k0s.lab.bo-tech.de/bv/images/sphinx-builder.git";
+    sphinx-builder.url = "github:bo-tech/sphinx-builder";
     nixpkgs.follows = "sphinx-builder/nixpkgs";
     flake-utils.follows = "sphinx-builder/flake-utils";
   };
