@@ -32,32 +32,10 @@ Started: 2026-02-03
 - [X] fix cilium / openebs workarounds in ~demo-ops~
   - could start with a copy of the needed files, then later it can improve when
     the apps have been moved into ~business-operations~.
-- [ ] review - check if nixos based testing can be used in demo-ops, compare k0s-nix
-- [ ] first test for ~demo-ops~ and/or ~business-operations~
-- [ ] review - the key generation and handling in ~demo-ops~ is just hacked in,
-  needs a more solid solution.
-- [ ] Extract public documentation to ~business-operations~
-- [ ] Build and publish documentation
-- [ ] ~demo-ops~ and ~b-ops~ should be able to refer back to the documentation
-- [ ] Experiment: explore multi-repo approaches for Flux/Kustomize layer
-- [ ] Experiment: try out most promising approaches with VolSync templates
-- [ ] Experiment: explore Taskfile pattern for cluster tasks (push to internal Gitea)
-- [ ] review - Development across repositories would benefit from something like
-  a "dev install", flakes don't seem to support this out of the box though.
-- [ ] review - Flakes can provide templates, maybe a template could be provided
-  to create an instance of the setup?
-  - check if templates also support updating like e.g. ~copier~ does
-
-*** Backlog
-
-- [ ] Document known limitations or similar
-  - [ ] Need to select and update per app instead of the whole thing
-- [ ] Update secrets handling documentation when working on ~demo-ops~
-- [ ] Consider submitting hardware modules to nixos-hardware
-- [ ] Document WOL/shutdown task pattern for cluster management
-- [ ] Document cluster task patterns (push, info, forward-gitea)
-- [ ] Remove unused tasks from ~b-ops~ (trigger-backup, k3s-*, bootstrap)
-- [ ] Create Renovate configuration for ~business-operations~ (GitHub)
+- [X] review - check if nixos based testing can be used in demo-ops, compare k0s-nix
+  - Concluded: NixOS VM tests good for module-level, but primary strategy
+    is pytest-based end-to-end testing. See context/notes/testing-strategy.md.
+    Next sprint focuses on testing.
 
 ** Focus
 
@@ -77,3 +55,21 @@ validate the multi-repo approach.
   conflict with profile-base (channel.nix sets nixpkgs registry for offline use)
 
 ** Closing Status
+
+Outcome: Success. The multi-repo approach is validated and working.
+
+What works:
+- ~business-operations~ exposes NixOS modules and Ansible roles via flake
+- All ~b-ops~ machines import from ~business-operations~
+- ~demo-ops~ exists with a working single-node k0s configuration
+- Ansible consumed via ~nix develop ...#ansible~
+- Hardware modules upstreamed to ~nixos-hardware~
+
+What moves forward:
+- Remaining open tasks moved to month plan backlog (2026-02-plan.md)
+- Testing strategy researched, next sprint focuses on end-to-end testing
+
+Stats:
+- Started: 2026-02-03
+- Closed: 2026-02-08
+- Duration: 6 days
