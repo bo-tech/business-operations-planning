@@ -48,6 +48,11 @@ validate the multi-repo approach.
 
 ** Notes
 
+- Copied Cilium and OpenEBS helm values from ~b-ops~ into ~demo-ops~
+  as interim solution. This unblocked ~demo-ops~ without waiting for
+  the full app extraction into ~business-operations~. Tracked in
+  ~demo-ops~ ADR-0002.
+
 ** Learnings and Insights
 
 - Local development: use ~--override-input business-operations path:...~ for testing
