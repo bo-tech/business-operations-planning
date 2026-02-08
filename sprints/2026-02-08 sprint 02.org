@@ -4,6 +4,7 @@ Started: 2026-02-08
 
 ** Plan
 
+- [ ] Review existing infrastructure testing tooling (testinfra, labgrid, goss, etc.)
 - [ ] Boot ~demo-ops~ dev config in QEMU on the test host, verify SSH works manually
 - [ ] Decide where the test code lives (~demo-ops~, separate repo, or ~business-operations~)
 - [ ] Set up pytest project skeleton with nix devShell
