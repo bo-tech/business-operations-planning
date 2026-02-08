@@ -29,7 +29,11 @@ Started: 2026-02-03
 - [X] Log ADR: Nix-centric dependency management for Ansible roles (ADR-0018)
 - [X] Put a ~demo-ops~ repo up and have a test VM in there using the
   ~business-operations~ profile.
+- [ ] fix cilium / openebs workarounds in ~demo-ops~
+  - could start with a copy of the needed files, then later it can improve when
+    the apps have been moved into ~business-operations~.
 - [ ] review - check if nixos based testing can be used in demo-ops, compare k0s-nix
+- [ ] first test for ~demo-ops~ and/or ~business-operations~
 - [ ] review - the key generation and handling in ~demo-ops~ is just hacked in,
   needs a more solid solution.
 - [ ] Extract public documentation to ~business-operations~
