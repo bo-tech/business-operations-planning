@@ -53,6 +53,11 @@ validate the multi-repo approach.
 - Local development: use ~--override-input business-operations path:...~ for testing
 - Container images need ~system.installer.channel.enable = false~ to avoid registry
   conflict with profile-base (channel.nix sets nixpkgs registry for offline use)
+- The split is more involved than anticipated. Extracting modules is
+  straightforward, but verifying that everything still works across
+  three repos is error-prone and manual. Some form of automatic
+  checking is vital before continuing the extraction work. Testing
+  comes as the next step, then splitting continues with confidence.
 
 ** Closing Status
 
