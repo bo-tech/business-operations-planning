@@ -4,6 +4,13 @@ Plans
 
 Month-level planning documents: ``YYYY-MM-plan.md``
 
+.. toctree::
+   :maxdepth: 1
+   :glob:
+   :reversed:
+
+   plans/*
+
 Purpose
 -------
 
@@ -11,10 +18,3 @@ Purpose
 - Bridges results and sprint execution
 - Weekly checkpoints to assess progress
 - Adjusted as reality changes
-
-.. toctree::
-   :maxdepth: 1
-   :glob:
-   :reversed:
-
-   plans/*
