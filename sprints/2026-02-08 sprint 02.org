@@ -1,0 +1,32 @@
+* Sprint 2: Testing Foundation for demo-ops
+
+Started: 2026-02-08
+
+** Plan
+
+- [ ] Boot ~demo-ops~ dev config in QEMU on the test host, verify SSH works manually
+- [ ] Decide where the test code lives (~demo-ops~, separate repo, or ~business-operations~)
+- [ ] Set up pytest project skeleton with nix devShell
+- [ ] Write QEMU VM lifecycle wrapper (start, wait for SSH, stop)
+- [ ] Write first pytest test: boot VM, assert SSH connection works
+- [ ] Build NixOS installer ISO with test SSH key baked in
+- [ ] Run recreate-machines playbook from pytest against the VM
+- [ ] Run bootstrap playbook, assert k0s node is Ready and Cilium is running
+- [ ] Document how to trigger test runs from the MacBook (SSH to test host)
+- [ ] Improve key generation handling in ~demo-ops~ (pulled from backlog)
+
+** Focus
+
+Prove the end-to-end deployment pipeline can be tested automatically
+against a QEMU VM.
+
+** Checkpoint
+
+"Can I run a command that deploys ~demo-ops~ into a VM and verifies
+Kubernetes is running?"
+
+** Notes
+
+** Learnings and Insights
+
+** Closing Status
