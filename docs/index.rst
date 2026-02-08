@@ -7,7 +7,7 @@ Planning
 
    about
    results/index
-   plans/index
+   plans
    decision-backlog/index
    process/index
    decision-log
