@@ -5,10 +5,10 @@ Started: 2026-02-08
 ** Plan
 
 - [X] Prepare a suitable test host (Linux, KVM)
-- [ ] Boot ~demo-ops~ dev config in QEMU on the test host, verify SSH works manually
-  - [ ] Build custom NixOS installer ISO with SSH key
-  - [ ] Transfer ISO to test host
-  - [ ] Boot QEMU VM on ~br0~, verify installer gets DHCP address
+- [-] Boot ~demo-ops~ dev config in QEMU on the test host, verify SSH works manually
+  - [X] Build custom NixOS installer ISO with SSH key
+  - [X] Transfer ISO to test host
+  - [X] Boot QEMU VM on ~br0~, verify installer gets DHCP address
   - [ ] Adjust ~dev.nix~ k0s API address to match DHCP lease
   - [ ] Run ~nixos-anywhere~ to deploy ~demo-ops#dev~ into the VM
   - [ ] Verify SSH to deployed system works
@@ -34,6 +34,20 @@ against a QEMU VM.
 Kubernetes is running?"
 
 ** Notes
+
+*** QEMU bridge helper for regular users
+
+QEMU's compiled-in bridge helper points to its own nix store path
+(~libexec/qemu-bridge-helper~) which is not setuid. The NixOS setuid
+wrapper is at ~/run/wrappers/bin/qemu-bridge-helper~. Running QEMU on
+a bridge as a regular user requires passing the wrapper path explicitly:
+
+#+begin_src bash
+qemu-system-x86_64 \
+  -netdev bridge,id=net0,br=br0,helper=/run/wrappers/bin/qemu-bridge-helper \
+  -device virtio-net-pci,netdev=net0 \
+  ...
+#+end_src
 
 ** Learnings and Insights
 
