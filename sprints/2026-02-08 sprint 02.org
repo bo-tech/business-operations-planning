@@ -4,8 +4,15 @@ Started: 2026-02-08
 
 ** Plan
 
-- [ ] Review existing infrastructure testing tooling (testinfra, labgrid, goss, etc.)
+- [X] Prepare a suitable test host (Linux, KVM)
 - [ ] Boot ~demo-ops~ dev config in QEMU on the test host, verify SSH works manually
+  - [ ] Build custom NixOS installer ISO with SSH key
+  - [ ] Transfer ISO to test host
+  - [ ] Boot QEMU VM on ~br0~, verify installer gets DHCP address
+  - [ ] Adjust ~dev.nix~ k0s API address to match DHCP lease
+  - [ ] Run ~nixos-anywhere~ to deploy ~demo-ops#dev~ into the VM
+  - [ ] Verify SSH to deployed system works
+- [ ] Review existing infrastructure testing tooling (testinfra, labgrid, goss, etc.)
 - [ ] Decide where the test code lives (~demo-ops~, separate repo, or ~business-operations~)
 - [ ] Set up pytest project skeleton with nix devShell
 - [ ] Write QEMU VM lifecycle wrapper (start, wait for SSH, stop)
@@ -13,7 +20,7 @@ Started: 2026-02-08
 - [ ] Build NixOS installer ISO with test SSH key baked in
 - [ ] Run recreate-machines playbook from pytest against the VM
 - [ ] Run bootstrap playbook, assert k0s node is Ready and Cilium is running
-- [ ] Document how to trigger test runs from the MacBook (SSH to test host)
+- [ ] Document how to trigger test runs from the workstation (SSH to test host)
 - [ ] Improve key generation handling in ~demo-ops~ (pulled from backlog)
 
 ** Focus
