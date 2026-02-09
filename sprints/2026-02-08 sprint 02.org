@@ -5,13 +5,15 @@ Started: 2026-02-08
 ** Plan
 
 - [X] Prepare a suitable test host (Linux, KVM)
-- [-] Boot ~demo-ops~ dev config in QEMU on the test host, verify SSH works manually
+- [X] Boot ~demo-ops~ dev config in QEMU on the test host, verify SSH works manually
   - [X] Build custom NixOS installer ISO with SSH key
   - [X] Transfer ISO to test host
   - [X] Boot QEMU VM on ~br0~, verify installer gets DHCP address
-  - [ ] Adjust ~dev.nix~ k0s API address to match DHCP lease
-  - [ ] Run ~nixos-anywhere~ to deploy ~demo-ops#dev~ into the VM
-  - [ ] Verify SSH to deployed system works
+  - [X] Adjust ~dev.nix~ to static IP (10.10.10.210), add serial console
+  - [X] Run ~nixos-anywhere~ to deploy ~demo-ops#dev~ into the VM
+  - [X] Verify SSH to deployed system works
+  - [X] Run full ansible flow (re-create-machines + bootstrap)
+  - [X] Verify k0s cluster operational (kubectl shows pods)
 - [ ] Review existing infrastructure testing tooling (testinfra, labgrid, goss, etc.)
 - [ ] Decide where the test code lives (~demo-ops~, separate repo, or ~business-operations~)
 - [ ] Set up pytest project skeleton with nix devShell
@@ -49,6 +51,39 @@ qemu-system-x86_64 \
   ...
 #+end_src
 
+*** QEMU hints with ~-nographic~
+
+- ~Ctrl-a x~ — kill QEMU immediately
+- ~Ctrl-a c~ — toggle QEMU monitor console (inspect devices, snapshots,
+  ~boot_set~, ~system_reset~, ~info~ commands)
+- ~Ctrl-a h~ — show all escape shortcuts
+- Boot device: ~-boot d~ = CD-ROM, ~-boot c~ = disk (default). After
+  installing, drop the ~-cdrom~ flag or switch to ~-boot c~.
+- Serial console: NixOS installed systems don't output to serial by
+  default. Add ~boot.kernelParams = [ "console=ttyS0,115200" ];~ to
+  get console output with ~-nographic~.
+
+*** UEFI boot required
+
+The disko config uses GPT + ESP (type EF00) with systemd-boot. QEMU
+defaults to SeaBIOS (BIOS), which can't boot this. Pass OVMF firmware:
+
+#+begin_src bash
+qemu-system-x86_64 \
+  -bios /path/to/ovmf/FV/OVMF.fd \
+  ...
+#+end_src
+
+Install OVMF via ~nix build nixpkgs#OVMF.fd~.
+
 ** Learnings and Insights
+
+- Use a static IP outside the DHCP range to avoid lease changes between
+  reboots.
+- ~nix copy --to ssh://user@host~ may fail with "lacks a signature by a trusted
+  key". Use ~root@~ instead. ~trusted-users~ would fix this but grants
+  root-equivalent nix store access.
+- Full ansible flow (re-create-machines + bootstrap) works in QEMU VM
+  including kexec.
 
 ** Closing Status
