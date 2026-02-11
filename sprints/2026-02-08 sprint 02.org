@@ -14,6 +14,7 @@ Started: 2026-02-08
   - [X] Verify SSH to deployed system works
   - [X] Run full ansible flow (re-create-machines + bootstrap)
   - [X] Verify k0s cluster operational (kubectl shows pods)
+- [ ] Review nixos testing, it seems to provide 80% of what is needed
 - [ ] Review existing infrastructure testing tooling (testinfra, labgrid, goss, etc.)
 - [ ] Decide where the test code lives (~demo-ops~, separate repo, or ~business-operations~)
 - [ ] Set up pytest project skeleton with nix devShell
