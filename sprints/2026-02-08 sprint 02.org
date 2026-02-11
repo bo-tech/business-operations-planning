@@ -48,6 +48,79 @@ Kubernetes is running?"
 
 ** Notes
 
+*** Testing related commands
+
+Worked with the `k0s-nix` flake most of the time: https://github.com/johbo/k0s-nix
+
+Documentation sources:
+
+- https://nix.dev/tutorials/nixos/integration-testing-using-virtual-machines.html
+- https://nixos.org/manual/nixos/stable/index.html#sec-nixos-tests
+
+**** ~-L~ flag to see the output
+
+This shows the output, or in more general terms the build log.
+
+**** Builder configuration
+
+The builder has to support ~kvm~ and ~nixos~:
+
+#+begin_src text
+  # Only run builds with "kvm" and "nixos"
+  admin@192.0.2.10 x86_64-linux - 8 1 kvm,nixos-test kvm,nixos-test
+
+  # Also run builds with "kvm" and "nixos"
+  admin@192.0.2.10 x86_64-linux - 8 1 kvm,nixos-test
+#+end_src
+
+**** Run the tests or "build" the test result
+
+#+begin_src text
+  nix build .#checks.x86_64-linux.single -L
+  nix build .#checks.aarch64-linux.single -L
+#+end_src
+
+Note that this works flawless with remote builders, so from a workstation one
+can trigger the test execution on any supported platform if there is a builder
+configured.
+
+**** Run on a macos system
+
+This will build a ~aarch64-linux~ system first and needs a builder for this.
+Then it will run the test on the macos system via qemu:
+
+#+begin_src text
+  nix build .#checks.aarch64-darwin.single -L
+#+end_src
+
+When interacting with the test runner this might be interesting. First build the
+driver:
+
+#+begin_src text
+  nix build .#checks.aarch64-darwin.single.driver
+#+end_src
+
+Then run it:
+
+#+begin_src text
+  ./result/bin/nixos-test-driver
+  ./result/bin/nixos-test-driver --interactive
+#+end_src
+
+**** Run a test again, using ~-rebuild~
+
+This only works on the local machine. There is no direct support for remote
+builders: https://github.com/NixOS/nix/issues/10451
+
+A workaround is to first copy the derivation and then to build it:
+
+#+begin_src text
+  drv=$(nix path-info --derivation .#checks.x86_64-linux.single)
+  nix copy --derivation --to ssh-ng://admin@192.0.2.10 .#checks.x86_64-linux.single
+  ssh admin@192.0.2.10 nix build "${drv}^out" --rebuild -L
+#+end_src
+
+
 *** Review of NixOS testing
 
 **** Details
