@@ -14,17 +14,27 @@ Started: 2026-02-08
   - [X] Verify SSH to deployed system works
   - [X] Run full ansible flow (re-create-machines + bootstrap)
   - [X] Verify k0s cluster operational (kubectl shows pods)
-- [ ] Review nixos testing, it seems to provide 80% of what is needed
-- [ ] Review existing infrastructure testing tooling (testinfra, labgrid, goss, etc.)
+- [X] Review nixos testing, it seems to provide 80% of what is needed
+  - it does, start with this and delay looking further into other options for now
+- [X] Review existing infrastructure testing tooling (testinfra, labgrid, goss, etc.)
+  - skip, only do when needed
+- [X] Set up pytest project skeleton with nix devShell
+  - not needed anymore
+- [X] Write QEMU VM lifecycle wrapper (start, wait for SSH, stop)
+  - not needed anymore
+- [X] Write first pytest test: boot VM, assert SSH connection works
+  - not needed anymore
+- [ ] run existing ~k0s-nix~ tests to verify it all works
 - [ ] Decide where the test code lives (~demo-ops~, separate repo, or ~business-operations~)
-- [ ] Set up pytest project skeleton with nix devShell
-- [ ] Write QEMU VM lifecycle wrapper (start, wait for SSH, stop)
-- [ ] Write first pytest test: boot VM, assert SSH connection works
-- [ ] Build NixOS installer ISO with test SSH key baked in
-- [ ] Run recreate-machines playbook from pytest against the VM
+- [ ] review and cleanup below tasks
+- [ ] Run recreate-machines playbook
 - [ ] Run bootstrap playbook, assert k0s node is Ready and Cilium is running
-- [ ] Document how to trigger test runs from the workstation (SSH to test host)
-- [ ] Improve key generation handling in ~demo-ops~ (pulled from backlog)
+  - has a challenge: Needs container images
+- [ ] Document how to trigger test runs
+- [ ] review - Build NixOS installer ISO with test SSH key baked in
+  - unclear if still needed currently
+- [ ] review - Improve key generation handling in ~demo-ops~ (pulled from backlog)
+  - unclear if still needed at the moment, may go back into backlog
 
 ** Focus
 
@@ -37,6 +47,28 @@ against a QEMU VM.
 Kubernetes is running?"
 
 ** Notes
+
+*** Review of NixOS testing
+
+**** Details
+
+- Q: Could it also be used for the disk partitioning part and the OS
+  bootstrap?
+- Q: How could the test driver be extended?
+- Q: Are there other similar approaches in the Nix community available?
+- Q: Would it be useful also for steps beyond the base setup?
+
+
+**** Conclusion
+
+It looks good enough.
+
+There is an extension to run other distributions in the test runner at
+https://github.com/numtide/nix-vm-test.
+
+Disk partitioning could be doable, there are installer related tests which may
+be worth looking into to learn more.
+
 
 *** QEMU bridge helper for regular users
 
