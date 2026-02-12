@@ -24,7 +24,8 @@ Started: 2026-02-08
   - not needed anymore
 - [X] Write first pytest test: boot VM, assert SSH connection works
   - not needed anymore
-- [ ] run existing ~k0s-nix~ tests to verify it all works
+- [X] run existing ~k0s-nix~ tests to verify it all works
+  - it does, better than anticipated. Cross system back and forth, just works.
 - [ ] Decide where the test code lives (~demo-ops~, separate repo, or ~business-operations~)
 - [ ] review and cleanup below tasks
 - [ ] Run recreate-machines playbook
