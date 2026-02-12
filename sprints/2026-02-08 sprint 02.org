@@ -26,12 +26,17 @@ Started: 2026-02-08
   - not needed anymore
 - [X] run existing ~k0s-nix~ tests to verify it all works
   - it does, better than anticipated. Cross system back and forth, just works.
-- [ ] Decide where the test code lives (~demo-ops~, separate repo, or ~business-operations~)
-- [ ] review and cleanup below tasks
-- [ ] Run recreate-machines playbook
-- [ ] Run bootstrap playbook, assert k0s node is Ready and Cilium is running
-  - has a challenge: Needs container images
-- [ ] Document how to trigger test runs
+- [X] Decide where the test code lives (~demo-ops~, separate repo, or ~business-operations~)
+- [ ] Test case to bring up a single machine cluster
+  - [ ] Scaffold test case, "hello world" like check
+  - [ ] k0s is starting
+  - [ ] containers are starting
+    - Challenge: Needs the images, no network access in a sandboxed environment.
+  - [ ] Ansible based bootstrap, e.g. Cilium and OpenEBS are installed and working
+    - Also depends on container images
+  - [ ] Ansible based machine creation
+    - This would run ~nixos-anywhere~ into the test machine, tricky.
+- [ ] Document how to trigger test runs with examples
 - [ ] review - Build NixOS installer ISO with test SSH key baked in
   - unclear if still needed currently
 - [ ] review - Improve key generation handling in ~demo-ops~ (pulled from backlog)
@@ -48,6 +53,19 @@ against a QEMU VM.
 Kubernetes is running?"
 
 ** Notes
+
+*** Where to put the tests?
+
+**** ~demo-ops~ content
+
+- Hardware configuration for the vm, that's builtin to the testing framework anyway.
+- Host configuration, that's easily put inline into the test spec
+- Disk layout via disko -> that's tricky, unclear how to do in the testing framework
+  - Same time, not needed for every test
+
+Conclusions:
+
+- ~business-operations~ is the right place.
 
 *** Testing related commands
 
