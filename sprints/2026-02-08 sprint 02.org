@@ -27,7 +27,7 @@ Started: 2026-02-08
 - [X] run existing ~k0s-nix~ tests to verify it all works
   - it does, better than anticipated. Cross system back and forth, just works.
 - [X] Decide where the test code lives (~demo-ops~, separate repo, or ~business-operations~)
-- [-] Test case to bring up a single machine cluster
+- [X] Test case to bring up a single machine cluster
   - [X] Scaffold test case, "hello world" like check
   - [X] k0s is starting
   - [X] containers starting in the interactive runner
@@ -36,13 +36,14 @@ Started: 2026-02-08
     - Challenge: Needs the images, no network access in a sandboxed environment.
   - [X] Ansible based bootstrap, e.g. Cilium and OpenEBS are installed and working
     - Also depends on container images
-  - [ ] Ansible based machine creation
+  - [X] Ansible based machine creation
     - This would run ~nixos-anywhere~ into the test machine, tricky.
-- [ ] Document how to trigger test runs with examples
-- [ ] review - Build NixOS installer ISO with test SSH key baked in
+    - Skipped the ~nixos-anywhere~ step for now, then the rest can be tested
+      without issues.
+- [X] Document how to trigger test runs with examples
+- [X] review - Build NixOS installer ISO with test SSH key baked in
   - unclear if still needed currently
-- [ ] review - Improve key generation handling in ~demo-ops~ (pulled from backlog)
-  - unclear if still needed at the moment, may go back into backlog
+  - skip, no need at the moment
 
 ** Focus
 
