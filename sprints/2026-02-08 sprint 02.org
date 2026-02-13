@@ -27,12 +27,14 @@ Started: 2026-02-08
 - [X] run existing ~k0s-nix~ tests to verify it all works
   - it does, better than anticipated. Cross system back and forth, just works.
 - [X] Decide where the test code lives (~demo-ops~, separate repo, or ~business-operations~)
-- [ ] Test case to bring up a single machine cluster
-  - [ ] Scaffold test case, "hello world" like check
-  - [ ] k0s is starting
-  - [ ] containers are starting
+- [-] Test case to bring up a single machine cluster
+  - [X] Scaffold test case, "hello world" like check
+  - [X] k0s is starting
+  - [X] containers starting in the interactive runner
+    - needs DHCP on the slirp interface of qemu to work
+  - [X] containers are starting
     - Challenge: Needs the images, no network access in a sandboxed environment.
-  - [ ] Ansible based bootstrap, e.g. Cilium and OpenEBS are installed and working
+  - [X] Ansible based bootstrap, e.g. Cilium and OpenEBS are installed and working
     - Also depends on container images
   - [ ] Ansible based machine creation
     - This would run ~nixos-anywhere~ into the test machine, tricky.
