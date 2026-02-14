@@ -215,3 +215,22 @@ Install OVMF via ~nix build nixpkgs#OVMF.fd~.
   including kexec.
 
 ** Closing Status
+
+Results:
+- Basic testing based on the NixOS testing framework built in.
+
+Details:
+- Cross platform support is very useful. E.g. run from macbook into linux,
+  execute locally or remote.
+- Currently only with disabled sandbox, so that images can be fetched from the
+  network.
+- The ~-rebuild~ flag for re-running tests on remote builders needs a
+  workaround because of lacking support.
+
+Not yet covered in testing:
+- ~nixos-anywhere~ deployment path not yet tested automatically.
+
+Stats:
+- Started: 2026-02-08
+- Closed: 2026-02-14
+- Duration: 7 days
