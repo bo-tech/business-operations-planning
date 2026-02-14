@@ -19,10 +19,9 @@ Started: 2026-02-14
 Discover how to split the Kubernetes layer out of ~b-ops~ into
 ~business-operations~.
 
-
-
 The details of the phases are documented in ~b-ops~ within the file
 ~docs/kubernetes/bootstrap-overview.rst~.
+
 ** Checkpoint
 
 ** Notes
@@ -58,6 +57,28 @@ Ideally the layered concept can stay to some degree.
 The *Apps* part should eventually be split in some way, so that it is possible
 to decide which apps to install. It should be possible to also bring one's own
 apps without a need to be clued into the mono repository on the long run.
+
+*** Bootstrap phase
+
+**** Pre-conditions
+
+- Cluster is working and can be accessed via ~kubectl~.
+
+**** Steps
+
+- Deploy ~bootstrap~ folder via ~kustomize~.
+- Deploy the cluster's age key.
+- Deploy Gitea bootstrap secret.
+- Wait until Gitea has deen initialized and configured.
+- Push repository into Gitea.
+- Deploy cluster settings and secret settings.
+- Kick off Flux by deploying ~flux/config~ via ~kustomize~.
+
+Note: ~kustomize~ means ~kubectl apply --server-side --kustomize~.
+
+*** Base apps phase
+
+This is already purely done via Flux.
 
 ** Learnings and Insights
 
