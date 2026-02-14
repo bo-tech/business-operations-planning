@@ -4,6 +4,7 @@ Started: 2026-02-14
 
 ** Plan
 
+- [ ] Refine plan according to phases in the ~b-ops~ repository.
 - [ ] Research how others handle shared Kustomize bases across repos (Flux
   multi-source, OCI, remote URLs)
 - [ ] Experiment: explore multi-repo approaches for Flux/Kustomize layer
@@ -18,9 +19,45 @@ Started: 2026-02-14
 Discover how to split the Kubernetes layer out of ~b-ops~ into
 ~business-operations~.
 
+
+
+The details of the phases are documented in ~b-ops~ within the file
+~docs/kubernetes/bootstrap-overview.rst~.
 ** Checkpoint
 
 ** Notes
+
+*** Overview ~b-ops~
+
+Looking at the following "phases" as described in the ~b-ops~ bootstrap overview:
+
+- *Base infrastructure*
+  - This is covered already from sprint 2.
+- *Bootstrap*
+  - This is about making FluxCD operational and providing a Git server so that
+    FluxCD can start to take over.
+  - Could aim for an empty cluster modeled after the ~dev-env~ setup.
+  - Allows to "git push" into the cluster, and Flux will reconcile.
+- *Base Apps*
+  - Groups together the applications which are required so
+    that the cluster is fully able to manage itself.
+  - Examples: Vault, External Secrets, Gitlab, Volsync, Flux Webhook, Snapshot
+    Controller, DNS, Rook-Ceph
+- *Apps*
+  - Everything else.
+
+The current setup is already layered.
+
+Only the layer *Apps* is expected to be customized.
+
+*Base Apps* is still somewhat unclear, esp. since it does have "heavy" content
+like Gitlab, Rook-Ceph and Vault.
+
+Ideally the layered concept can stay to some degree.
+
+The *Apps* part should eventually be split in some way, so that it is possible
+to decide which apps to install. It should be possible to also bring one's own
+apps without a need to be clued into the mono repository on the long run.
 
 ** Learnings and Insights
 
