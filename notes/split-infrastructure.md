@@ -229,26 +229,30 @@ b-ops and demo-ops reference via:
 - Larger repo
 - Mixed concerns (k8s + infra)
 
-## Recommended Approach
+## Outcome
 
-Keep as monorepo (`business-operations`). Further splitting/refactoring can
-happen later. Focus on simplest possible split while staying working.
+Approach: monorepo (`business-operations`). All three phases completed.
 
-**Phase 1: Extract hardware modules**
+**Phase 1: Extract hardware modules** (done)
 
-1. Create `business-operations/infrastructure/nixos/` with flake.nix
-2. Copy hardware configs (minisforum, vm) - no secrets, 100% reusable
-3. Verify `b-ops` can import and use the hardware modules
+Hardware modules submitted upstream to nixos-hardware instead of keeping
+them in business-operations. b-ops imports from nixos-hardware directly.
 
-**Phase 2: Parameterize and extract k0s modules**
+**Phase 2: Extract k0s modules** (done)
 
-1. Make SSH keys a module option (not hardcoded)
-2. Make DNS servers configurable
-3. Extract k0s-node-defaults.nix and k0s-node-disks.nix to `business-operations`
-4. Update `b-ops` to use the parameterized modules
-5. Create minimal `demo-ops` using the modules (validates extraction)
+Evolved differently than planned. Instead of parameterizing the original
+b-ops machine-classes, business-operations got a fresh module structure:
 
-**Phase 3: Extract Ansible roles** (done - 2026-02-06, ADR-0018)
+- `nixos/profiles/k0s-node.nix` — composable profile
+- `nixos/modules/kubernetes/k0s.nix` — k0s configuration module
+
+SSH keys were never hardcoded in business-operations — user management
+stays external via `base-users` flake input. Site-specific disk layouts
+(`k0s-node-disks.nix`, `k0s-node-vm-disks.nix`) remain in b-ops where
+they belong. Both b-ops and demo-ops consume the business-operations
+modules via flake input.
+
+**Phase 3: Extract Ansible roles** (done, ADR-0018)
 
 Roles and playbooks extracted to `business-operations/ansible/`. Helm roles
 parameterized with configurable paths (defaulting to cluster-0 as reference).
@@ -256,7 +260,3 @@ b-ops ansible directory reduced to inventories and artifacts only.
 
 Consuming repositories use `nix develop github:bo-tech/business-operations#ansible`
 which provides tools and sets `ANSIBLE_ROLES_PATH` and `BO_PLAYBOOKS`.
-
-## Backlog
-
-- Consider submitting hardware modules to nixos-hardware
