@@ -4,9 +4,16 @@ Started: 2026-02-14
 
 ** Plan
 
-- [ ] Refine plan according to phases in the ~b-ops~ repository.
+- [X] Refine plan according to phases in the ~b-ops~ repository.
 - [ ] Research how others handle shared Kustomize bases across repos (Flux
   multi-source, OCI, remote URLs)
+- [ ] Deployment of the bootstrap folder
+  - Deployment of Manifests
+  - Deployment of cluster specific secrets
+- [ ] Deployment of cluster specific settings / secret settings
+- [ ] Push the repository into the internal Gitea service
+- [ ] Kick off Flux, focus on cluster ~dev-env~
+- [ ] --- refine below this point
 - [ ] Experiment: explore multi-repo approaches for Flux/Kustomize layer
 - [ ] Experiment: try out most promising approaches with VolSync
   templates
