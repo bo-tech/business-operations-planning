@@ -1,0 +1,27 @@
+* Sprint 3: Kubernetes Layer Extraction Experiment
+
+Started: 2026-02-14
+
+** Plan
+
+- [ ] Research how others handle shared Kustomize bases across repos (Flux
+  multi-source, OCI, remote URLs)
+- [ ] Experiment: explore multi-repo approaches for Flux/Kustomize layer
+- [ ] Experiment: try out most promising approaches with VolSync
+  templates
+- [ ] Experiment: explore Taskfile pattern for cluster tasks (push to
+  internal Gitea)
+- [ ] Document findings and decide on the approach
+
+** Focus
+
+Discover how to split the Kubernetes layer out of ~b-ops~ into
+~business-operations~.
+
+** Checkpoint
+
+** Notes
+
+** Learnings and Insights
+
+** Closing Status
