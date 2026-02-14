@@ -15,10 +15,10 @@ Split b-ops into three repositories:
 | Layer | Document | Action Needed |
 |-------|----------|---------------|
 | Flux/GitOps | [split-flux.md](split-flux.md) | Yes |
-| Infrastructure | [split-infrastructure.md](split-infrastructure.md) | Yes |
 | Documentation | [split-documentation.md](split-documentation.md) | Yes |
 | Tooling | [split-tooling.md](split-tooling.md) | Yes |
-| Configuration | [split-configuration.md](split-configuration.md) | No |
+| Infrastructure | [split-infrastructure.md](split-infrastructure.md) | Done |
+| Configuration | [split-configuration.md](split-configuration.md) | Done |
 
 ## Layer Summary
 
