@@ -5,11 +5,11 @@ Started: 2026-02-14
 ** Plan
 
 - [X] Refine plan according to phases in the ~b-ops~ repository.
-- [ ] Research how others handle shared Kustomize bases across repos (Flux
-  multi-source, OCI, remote URLs)
+- [X] Research how others handle shared Kustomize bases across repos
 - [ ] Deployment of the bootstrap folder
   - Deployment of Manifests
   - Deployment of cluster specific secrets
+- [ ] Test kluctl for the bootstrap deployment
 - [ ] Deployment of cluster specific settings / secret settings
 - [ ] Push the repository into the internal Gitea service
 - [ ] Kick off Flux, focus on cluster ~dev-env~
@@ -32,6 +32,121 @@ The details of the phases are documented in ~b-ops~ within the file
 ** Checkpoint
 
 ** Notes
+
+*** Dependencies
+
+**** Overview
+
+- ~ansible~ folder
+  - Using currently the shell out of ~business-operations~
+- ~nixos~ folder
+  - Input of a Nix Flake.
+  - Dev: Point to a local clone of ~business-operations~ with builtin tooling of
+    Nix.
+- ~bootstrap~ folder
+  - Points into ~business-operations~ from a Kustomization.
+  - Dev: Point to a local clone of ~business-operations~ instead.
+- FluxCD
+  - Has a ~GitRepository~ source pointing to a reference of
+    ~business-operations~.
+
+**** Approach for ~bootstrap~
+
+This is all handled in the CLI, basically client side.
+
+Tweaking the path in the Kustomization or even defining the overlay twice, once
+as a dev variant to expect a local clone.
+
+**** Approach for FluxCD
+
+The ~GitRepository~ lives in ~b-ops~ and should pin down the exact reference as
+tag or commit.
+
+An update would be done by updating ~b-ops~ which sets the reference.
+
+Development would benefit from a changed URL, either pointing into a fork of
+~business-operations~ or even pointing to a fork in the internal Gitea instance.
+
+The drawback of pointing into a reference like ~main~ or another branch name
+would be that this is impossible (or at least fairly involved) to reproduce in
+retrospect.
+
+**** ~kluctl~ inspection
+
+It does have the concept of overriding the git urls, this would solve the issue
+in a similar way how nix is solving it with flake input overrides.
+
+On the layer of it's custom ~Deployment~ object it does support git urls and oci
+urls.
+
+Apart from that most other parts are based on plain ~Kustomizations~.
+
+***** Conclusion
+
+The direct support for SOPS and the support for overriding git inputs would make
+it a very good fit for the bootstrap part instead of plain ~kubectl~.
+
+The ~nixpkgs~ version is up to date, using it would not involve a lot of tweaks.
+
+*** Bootstrap folder
+
+**** Research ~kluctl~
+
+It has the concept of library deployments which can be imported. This could be
+interesting.
+
+See: https://kluctl.io/docs/kluctl/kluctl-libraries/
+
+**** Content
+
+***** Manifests
+
+The bootstrap folder's *manifests* are not specific per instance. These can be used
+directly out of ~business-operations~. The deployment of these is a one off.
+
+#+begin_notes
+The bootstrap seems to be specific to the usage of FluxCD.
+
+It would not be needed if a push model would be used, like a ~kluctl~ setup
+could do.
+#+end_notes
+
+***** Secrets
+
+There are a few secrets deployed, these are all instance specific.
+
+***** Kustomization
+
+Tweaks components as needed. For development the storage class is currently
+tweaked out.
+
+*** FluxCD
+
+**** GitRepository
+
+The field ~spec.ref~ is most relevant. It allows to specify a commit reference
+via ~spec.ref.commit~.
+
+This could be one way to include ~business-operations~ into the local
+repository. The ~GitRepository~ reference would be managed in the ~b-ops~
+repository. This does need a Git commit per update and effectively makes
+~business-operations~ a "submodule" of ~b-ops~.
+
+Compare also ~.spec.recurseSubmodules~.
+
+See: https://fluxcd.io/flux/components/source/gitrepositories/
+
+**** External Artifact
+
+- Allows to have artifacts produced by an external system.
+
+See: https://fluxcd.io/flux/components/source/externalartifacts/
+
+**** Artifact Generator
+
+- Allows to compose multiple artifacts together.
+
+See: https://fluxcd.io/flux/components/source/artifactgenerators/
 
 *** Overview ~b-ops~
 
