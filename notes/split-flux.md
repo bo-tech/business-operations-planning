@@ -79,7 +79,23 @@ b-ops/                        # Private - production use
 
 ### Option A: Flux Multi-Source (Recommended)
 
-business-operations becomes a second `GitRepository` in Flux. Kustomizations can reference bases from either repo. Templates migrate one-by-one.
+The repositories can be combined in two main ways:
+
+- Git submodules, this works by using the field `.spec.recurseSubmodules`.
+- Inclusion on the Flux level, this works by using `.spec.include[].repository`
+  with an optional mapping.
+
+There are further ways:
+
+- Git subtrees would also work
+- Kustomize's Kustomizations can point to Git URLs in their `resources`
+  configuration.
+- `business-operations` becomes a second `GitRepository` in Flux. Flux'
+  Kustomizations point to one of the two repositories.
+
+#### Code scribbles
+
+Kustomizations can reference bases from either repo. Templates migrate one-by-one.
 
 Configuration change in b-ops:
 ```yaml
@@ -94,7 +110,26 @@ spec:
     branch: main
 ```
 
+Including a repository into another one, somewhat like a submodule in git is possible in Flux:
+
+```yaml
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: include-example
+spec:
+  include:
+    - repository:
+        name: other-repository
+      fromPath: deploy/kubernetes
+      toPath: base/app
+```
+
+See: <https://fluxcd.io/flux/components/source/gitrepositories/#include>.
+
+
 Kustomization using remote base:
+
 ```yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
