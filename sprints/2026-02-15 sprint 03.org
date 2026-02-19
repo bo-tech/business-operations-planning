@@ -13,8 +13,31 @@ Started: 2026-02-14
 - [X] Push the repository into the internal Gitea service
 - [X] Kick off Flux, focus on cluster ~dev-env~
 - [X] Test kluctl for the bootstrap deployment
+- [ ] re-run full dev cluster from scratch into minikube to verify latest changes
+- [ ] Add applications into ~business-operations~ and use in ~dev-env~
+  - [ ] ~cloudnative-pg~ may be an good start, does not need cluster specific
+    customization
+    - use an app from ~business-operations~ without tweaking it
+  - [ ] ~echoserver~ is as simple as it gets
+    - use an app and have cluster specific configuration applied
+  - [ ] ~hajimari~ uses a few variables out of the cluster settings
+    - use an app and have cluster specific configuration applied
+  - [ ] ~lldap~ needs a volume
+    - prepare for the backup / restore experiments later
+  - [ ] ~forgejo~ or ~synapse~ use a database
+    - prepare for the backup / restore experiments later
+- [ ] Test out Kustomize component for backup and restore handling
+  - [ ] ~lldap~ needs a volume, could be suitable for this
+  - [ ] ~forgejo~ could be an good candidate as well
+    - https://code.forgejo.org/forgejo-helm/forgejo-helm as a Helm chart
+  - [ ] ~synapse~ out of ~cluster-exp~ uses both database and volume, without
+    being an internal chart or image.
+- [ ] re-run full dev cluster from scratch into minikube to verify latest changes
+- [ ] update and re-run full demo-ops cluster
 - [ ] --- refine below this point
-- [ ] Consider: Create a second internal repository for ~business-operations~
+- [ ] Update ~demo-ops~ or provide builtin ~dev-env~ for ~business-operations~
+- [ ] Consider: Create a second internal repository for ~business-operations~ in
+  the internal Gitea
 - [ ] Experiment: explore multi-repo approaches for Flux/Kustomize layer
 - [ ] Experiment: try out most promising approaches with VolSync
   templates
@@ -26,10 +49,10 @@ Started: 2026-02-14
 
 - [ ] Dependency pinning for ~ansible~, ~nixos~ and ~kubernetes~.
   - Ideally this should use the same mechanism.
-- [ ] Usage of Ansible. If the inventory is maintained in Nix already, then it
+- [ ] Usage of *Ansible*. If the inventory is maintained in Nix already, then it
   may be possible to replace the Ansible setup with simple scripts and have one
   tool less in the chain.
-- [ ] Usage of Kluctl. Both bootstrap and also the FluxCD part could be
+- [ ] Usage of *Kluctl*. Both bootstrap and also the FluxCD part could be
   simplified using Kluctl and a push based approach.
 
 ** Focus
