@@ -12,7 +12,7 @@ Started: 2026-02-14
 - [X] Deployment of cluster specific settings / secret settings
 - [X] Push the repository into the internal Gitea service
 - [X] Kick off Flux, focus on cluster ~dev-env~
-- [ ] Test kluctl for the bootstrap deployment
+- [X] Test kluctl for the bootstrap deployment
 - [ ] --- refine below this point
 - [ ] Consider: Create a second internal repository for ~business-operations~
 - [ ] Experiment: explore multi-repo approaches for Flux/Kustomize layer
@@ -22,8 +22,10 @@ Started: 2026-02-14
   internal Gitea)
 - [ ] Document findings and decide on the approach
 
-** Review
+** Review and Backlog
 
+- [ ] Dependency pinning for ~ansible~, ~nixos~ and ~kubernetes~.
+  - Ideally this should use the same mechanism.
 - [ ] Usage of Ansible. If the inventory is maintained in Nix already, then it
   may be possible to replace the Ansible setup with simple scripts and have one
   tool less in the chain.
@@ -56,6 +58,17 @@ local reference then simply does not resolve anymore.
 
 It seems to walk up the directory tree to detect a git repository as the root to
 copy files.
+
+Trying to find out if there are approaches available which I did not yet
+discover: https://github.com/kluctl/kluctl/discussions/1421.
+
+**** Conclusion
+
+- Usage for the bootstrap phase works nicely.
+- Templating could allow to make the bootstrap already configurable in
+  ~business-operations~.
+- Unclear how a good local setup for fast iteration would look like. One option
+  could be to consider a git submodule like approach.
 
 *** First deployment via bootstrap playbook
 
@@ -129,6 +142,9 @@ The ~nixpkgs~ version is up to date, using it would not involve a lot of tweaks.
 - Start with depending on the local clone being next to the ~b-ops~ repo.
 - Split and make it work.
 - Test if kluctl can help here.
+- The way how the dependency is pinned should ideally be the same, e.g.
+  ~ansible~, ~nixos~ and ~kubernetes~ should all use the same version of the
+  upstream repository.
 
 *** Bootstrap folder
 
