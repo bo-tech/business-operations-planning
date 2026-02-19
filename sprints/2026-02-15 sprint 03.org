@@ -6,20 +6,29 @@ Started: 2026-02-14
 
 - [X] Refine plan according to phases in the ~b-ops~ repository.
 - [X] Research how others handle shared Kustomize bases across repos
-- [ ] Deployment of the bootstrap folder
+- [X] Deployment of the bootstrap folder
   - Deployment of Manifests
   - Deployment of cluster specific secrets
+- [X] Deployment of cluster specific settings / secret settings
+- [X] Push the repository into the internal Gitea service
+- [X] Kick off Flux, focus on cluster ~dev-env~
 - [ ] Test kluctl for the bootstrap deployment
-- [ ] Deployment of cluster specific settings / secret settings
-- [ ] Push the repository into the internal Gitea service
-- [ ] Kick off Flux, focus on cluster ~dev-env~
 - [ ] --- refine below this point
+- [ ] Consider: Create a second internal repository for ~business-operations~
 - [ ] Experiment: explore multi-repo approaches for Flux/Kustomize layer
 - [ ] Experiment: try out most promising approaches with VolSync
   templates
 - [ ] Experiment: explore Taskfile pattern for cluster tasks (push to
   internal Gitea)
 - [ ] Document findings and decide on the approach
+
+** Review
+
+- [ ] Usage of Ansible. If the inventory is maintained in Nix already, then it
+  may be possible to replace the Ansible setup with simple scripts and have one
+  tool less in the chain.
+- [ ] Usage of Kluctl. Both bootstrap and also the FluxCD part could be
+  simplified using Kluctl and a push based approach.
 
 ** Focus
 
@@ -32,6 +41,33 @@ The details of the phases are documented in ~b-ops~ within the file
 ** Checkpoint
 
 ** Notes
+
+*** Kluctl testrun
+
+Using Kluctl does put additional constraints around the setup which are mainly
+relevant for development.
+
+For the bootstrap case, it does not allow a Kustomization to refer to sources
+outside of the project directory.
+
+One reason seems to be that Kluctl first runs a "rendering" phase to apply
+the Jinja 2 templating, and the result is then processed via Kustomize. The
+local reference then simply does not resolve anymore.
+
+It seems to walk up the directory tree to detect a git repository as the root to
+copy files.
+
+*** First deployment via bootstrap playbook
+
+With a stub inventory it is possible to run the bootstrap playbook into any
+cluster. Used the ~dev-env~ cluster for a small scale test.
+
+FluxCD did start up as intended, only Gitea did not deploy due to the missing
+reference into the ~business-operations~ repository. At this stage this is
+expected because soling this problem is one of the steps after the boostrap.
+
+Only challenge left is that the Kustomization points into ~business-operations~
+and needs some for of reference for this.
 
 *** Dependencies
 
@@ -87,6 +123,12 @@ The direct support for SOPS and the support for overriding git inputs would make
 it a very good fit for the bootstrap part instead of plain ~kubectl~.
 
 The ~nixpkgs~ version is up to date, using it would not involve a lot of tweaks.
+
+**** Conclusion
+
+- Start with depending on the local clone being next to the ~b-ops~ repo.
+- Split and make it work.
+- Test if kluctl can help here.
 
 *** Bootstrap folder
 
