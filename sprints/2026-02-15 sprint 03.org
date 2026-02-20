@@ -14,14 +14,17 @@ Started: 2026-02-14
 - [X] Kick off Flux, focus on cluster ~dev-env~
 - [X] Test kluctl for the bootstrap deployment
 - [ ] re-run full dev cluster from scratch into minikube to verify latest changes
-- [ ] Add applications into ~business-operations~ and use in ~dev-env~
-  - [ ] ~cloudnative-pg~ may be an good start, does not need cluster specific
+- [-] Add applications into ~business-operations~ and use in ~dev-env~
+  - [X] ~cloudnative-pg~ may be an good start, does not need cluster specific
     customization
     - use an app from ~business-operations~ without tweaking it
-  - [ ] ~echoserver~ is as simple as it gets
+  - [X] ~echoserver~ is as simple as it gets
     - use an app and have cluster specific configuration applied
-  - [ ] ~hajimari~ uses a few variables out of the cluster settings
+    - Configuration just works
+  - [X] ~hajimari~ uses a few variables out of the cluster settings
     - use an app and have cluster specific configuration applied
+    - [X] deployment
+    - [X] Needs custom values for the Helm chart
   - [ ] ~lldap~ needs a volume
     - prepare for the backup / restore experiments later
   - [ ] ~forgejo~ or ~synapse~ use a database
@@ -32,6 +35,10 @@ Started: 2026-02-14
     - https://code.forgejo.org/forgejo-helm/forgejo-helm as a Helm chart
   - [ ] ~synapse~ out of ~cluster-exp~ uses both database and volume, without
     being an internal chart or image.
+- [ ] review - The Flux Kustomization points to the Git Repository by name,
+  consider to replace by a better value than the current ~bv-ops-kubernetes~.
+- [ ] review - The namespace handling is odd, compare ~network~ which requires
+  ~base-apps~ when keeping the original structure.
 - [ ] re-run full dev cluster from scratch into minikube to verify latest changes
 - [ ] update and re-run full demo-ops cluster
 - [ ] --- refine below this point
@@ -65,7 +72,77 @@ The details of the phases are documented in ~b-ops~ within the file
 
 ** Checkpoint
 
+- Dev and demo cluster fully deployable based on a split setup.
+
 ** Notes
+
+*** ~cloudnative-pg~ split
+
+**** Options
+
+- Point to a Git URL in the `resources` of
+  `kubernetes/dev-env/apps/kustomization.yaml`
+- Deploy a Flux Kustomization which points into the ~business-operations~
+  repository via a ~GitRepository~ resource.
+- Expect ~business-operations~ in a subpath of the ~b-ops~ repository.
+  - This is using either submodules or Flux' include mechanism.
+
+**** Ways of using
+
+***** Unmodified from upstream
+
+Could be a Flux Kustomization pointing into the other repository's
+Kustomization, like in bootstrap.
+
+A well-known path within the repository would also work without issues. This
+would be a submodule or a source combination.
+
+***** Modified
+
+Does require a local Kustomization.
+
+This uses the ~resources~ to point to remote sources, or it depends on the other
+repository to be available in a well-known path within the repository, either by
+submodule or by include.
+
+**** Submodule vs. Flux' Include
+
+In both cases the ~b-ops~ repository points into the ~business-operations~
+repository:
+
+- A submodule points into the commit.
+- A Flux Include based combination points into a reference, which can be a
+  commit but also could be a moving target like a branch name.
+
+For now a constraint would be that only one version of ~business-operations~ can
+be pointed into. This would be different if the Kustomization of the respective
+application or building block would point directly into ~business-operations~.
+
+If ever needed for a particular case, this can always be modeled this way as an
+exception. Alternative approaches could be to branch off in
+~business-operations~ in a fork and use that instead. Also having two versions
+included would be an option.
+
+The inclusion mechanism does not affect ~business-operations~, only the using
+repository like ~b-ops~ would be affected, so that experimenting with the
+approaches does not affect the shared repository in a negative way. The decision
+how to use and include is completely inside the using repository.
+
+**** Hint: Dependency Management
+
+From the experimentation so far there is a clear hint that a mechanism for
+dependency management will be eventually needed.
+
+It seems that it should support a fine granular combination of building blocks
+in some way. Somewhat similar to how modern package managers include a bunch of
+libraries and support freezing / locking dependencies to a particular version.
+
+It may be that a generic tool like Nix could help here to combine the fragments
+in a way so that the result forms a directory tree which tooling like Kustomize,
+Kluctl or Flux could as input.
+
+This should be delayed as much as possible to better understand the real needs
+first.
 
 *** Kluctl testrun
 
@@ -284,5 +361,19 @@ Note: ~kustomize~ means ~kubectl apply --server-side --kustomize~.
 This is already purely done via Flux.
 
 ** Learnings and Insights
+
+*** Kustomize and patching
+
+Some applications are set up with common configuration and then adjustments for
+the particular case.
+
+One example is hajimari which supports a set of bookmarks to be configured
+through its Helm values and a list of namespaces to observe.
+
+The list of namespaces is a list of string values. With the strategic patches
+such lists can only be replaced but not appended to.
+
+As a workaround either copy the list or use the JSON patches instead.
+
 
 ** Closing Status
