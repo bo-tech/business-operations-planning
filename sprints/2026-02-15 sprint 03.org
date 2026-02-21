@@ -25,12 +25,12 @@ Started: 2026-02-14
     - use an app and have cluster specific configuration applied
     - [X] deployment
     - [X] Needs custom values for the Helm chart
-  - [ ] ~lldap~ needs a volume
+  - [X] ~lldap~ needs a volume
     - prepare for the backup / restore experiments later
   - [ ] ~forgejo~ or ~synapse~ use a database
     - prepare for the backup / restore experiments later
-- [ ] Test out Kustomize component for backup and restore handling
-  - [ ] ~lldap~ needs a volume, could be suitable for this
+- [-] Test out Kustomize component for backup and restore handling
+  - [X] ~lldap~ needs a volume, could be suitable for this
   - [ ] ~forgejo~ could be an good candidate as well
     - https://code.forgejo.org/forgejo-helm/forgejo-helm as a Helm chart
   - [ ] ~synapse~ out of ~cluster-exp~ uses both database and volume, without
@@ -75,6 +75,12 @@ The details of the phases are documented in ~b-ops~ within the file
 - Dev and demo cluster fully deployable based on a split setup.
 
 ** Notes
+
+*** Backup / Restore handling
+
+The current state just did work based on the Kustomize components.
+
+Tested with ~lldap~.
 
 *** ~cloudnative-pg~ split
 
