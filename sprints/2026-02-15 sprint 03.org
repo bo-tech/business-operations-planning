@@ -13,8 +13,7 @@ Started: 2026-02-14
 - [X] Push the repository into the internal Gitea service
 - [X] Kick off Flux, focus on cluster ~dev-env~
 - [X] Test kluctl for the bootstrap deployment
-- [ ] re-run full dev cluster from scratch into minikube to verify latest changes
-- [-] Add applications into ~business-operations~ and use in ~dev-env~
+- [X] Add applications into ~business-operations~ and use in ~dev-env~
   - [X] ~cloudnative-pg~ may be an good start, does not need cluster specific
     customization
     - use an app from ~business-operations~ without tweaking it
@@ -27,8 +26,9 @@ Started: 2026-02-14
     - [X] Needs custom values for the Helm chart
   - [X] ~lldap~ needs a volume
     - prepare for the backup / restore experiments later
-  - [ ] ~forgejo~ or ~synapse~ use a database
+  - [X] ~forgejo~ or ~synapse~ use a database
     - prepare for the backup / restore experiments later
+- [X] re-run full dev cluster from scratch into minikube to verify latest changes
 - [-] Test out Kustomize component for backup and restore handling
   - [X] ~lldap~ needs a volume, could be suitable for this
   - [ ] ~forgejo~ could be an good candidate as well
