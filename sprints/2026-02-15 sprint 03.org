@@ -41,13 +41,14 @@ Started: 2026-02-14
     - skipped for now
 - [X] re-run full dev cluster from scratch into minikube to verify latest changes
   - works, needs a few manual tweaks regarding the cluster revision / database revision
-- [ ] review - The Flux Kustomization points to the Git Repository by name,
+- [X] review - The Flux Kustomization points to the Git Repository by name,
   consider to replace by a better value than the current ~bv-ops-kubernetes~.
+  - not a big issue now, can be done after the splitting
+- [ ] Update ~demo-ops~ or provide builtin ~dev-env~ for ~business-operations~
 - [ ] review - The namespace handling is odd, compare ~network~ which requires
   ~base-apps~ when keeping the original structure.
 - [ ] update and re-run full demo-ops cluster
 - [ ] --- refine below this point
-- [ ] Update ~demo-ops~ or provide builtin ~dev-env~ for ~business-operations~
 - [ ] Consider: Create a second internal repository for ~business-operations~ in
   the internal Gitea
 - [ ] Experiment: explore multi-repo approaches for Flux/Kustomize layer
