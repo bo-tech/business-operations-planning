@@ -44,11 +44,11 @@ Started: 2026-02-14
 - [X] review - The Flux Kustomization points to the Git Repository by name,
   consider to replace by a better value than the current ~bv-ops-kubernetes~.
   - not a big issue now, can be done after the splitting
+- [ ] --- refine below this point
 - [ ] Update ~demo-ops~ or provide builtin ~dev-env~ for ~business-operations~
 - [ ] review - The namespace handling is odd, compare ~network~ which requires
   ~base-apps~ when keeping the original structure.
 - [ ] update and re-run full demo-ops cluster
-- [ ] --- refine below this point
 - [ ] Consider: Create a second internal repository for ~business-operations~ in
   the internal Gitea
 - [ ] Experiment: explore multi-repo approaches for Flux/Kustomize layer
