@@ -29,17 +29,22 @@ Started: 2026-02-14
   - [X] ~forgejo~ or ~synapse~ use a database
     - prepare for the backup / restore experiments later
 - [X] re-run full dev cluster from scratch into minikube to verify latest changes
-- [-] Test out Kustomize component for backup and restore handling
+- [X] Test out Kustomize component for backup and restore handling
   - [X] ~lldap~ needs a volume, could be suitable for this
-  - [ ] ~forgejo~ could be an good candidate as well
+  - [X] ~forgejo~ could be an good candidate as well
     - https://code.forgejo.org/forgejo-helm/forgejo-helm as a Helm chart
-  - [ ] ~synapse~ out of ~cluster-exp~ uses both database and volume, without
+      - [X] activate backup
+      - [X] re-create cluster from scratch with restore on
+      - [X] check if the data did arrive in ~forgejo~ and if it is fully functional
+  - [X] ~synapse~ out of ~cluster-exp~ uses both database and volume, without
     being an internal chart or image.
+    - skipped for now
+- [X] re-run full dev cluster from scratch into minikube to verify latest changes
+  - works, needs a few manual tweaks regarding the cluster revision / database revision
 - [ ] review - The Flux Kustomization points to the Git Repository by name,
   consider to replace by a better value than the current ~bv-ops-kubernetes~.
 - [ ] review - The namespace handling is odd, compare ~network~ which requires
   ~base-apps~ when keeping the original structure.
-- [ ] re-run full dev cluster from scratch into minikube to verify latest changes
 - [ ] update and re-run full demo-ops cluster
 - [ ] --- refine below this point
 - [ ] Update ~demo-ops~ or provide builtin ~dev-env~ for ~business-operations~
@@ -78,9 +83,33 @@ The details of the phases are documented in ~b-ops~ within the file
 
 *** Backup / Restore handling
 
+**** Volumes
+
 The current state just did work based on the Kustomize components.
 
 Tested with ~lldap~.
+
+**** Databases
+
+The ~cloudnative-pg~ operator needs a twist: The backup runs into a S3 bucket
+with a given server name.
+
+When restoring, the restore must be done with this particular server name, and
+the backup configuration must point to a new server name.
+
+The reason is that otherwise it would start to put the WAL backup into the same
+bucket, potentially overwriting the existing data.
+
+This means that every restore needs an update of the backup server name, e.g.
+appending a "backup-revision". The restore configuration will have to be
+adjusted after the fact.
+
+If the restore is made for the whole application or the whole cluster, then the
+existing parameter ~cluster_revision~ has to be incremented. And after the fact
+the ~cluster_boostrap_revision~ has to be adjusted as well.
+
+For the database this currently means that both the cluster level revision and
+the database level revision are included into the server name.
 
 *** ~cloudnative-pg~ split
 
