@@ -81,6 +81,243 @@ The details of the phases are documented in ~b-ops~ within the file
 
 ** Notes
 
+*** Conclusions
+
+**** Submodule usage
+
+This is fine for the purpose. The "instance" repository of a cluster points into
+~business-operations~ based on a commit hash.
+
+This glues the nixos, ansible and the kubernetes layer in the same way.
+
+***** Conclusion
+
+Keep as-is for now to be able to finish the split first.
+
+**** Backup / Restore
+
+The current implementation does depend on the concept of "revision" values on
+the cluster level, and for the database also on the database level:
+
+- ~cluster_revision~
+- ~backup-revision~ for the database.
+  - Done as annotation in the experiments with the app ~forgejo~. Implicit in
+    most other cases by being hardcoded.
+
+And for retore:
+
+- ~cluster_bootstrap_revision~
+- ~restore-revision~
+
+The current cluster settings have a few more parameters which are related and
+add the concept that there are "stages" of the state for backup and restore.
+These correspond to S3 buckets at the moment.
+
+The original idea is that a cluster ~prod~ does backup into ~prod~ and restore
+from ~prod~. Then a cluster ~acceptance~ would restore from ~prod~ but backup
+into ~acceptance~ to ensure that no data from testing an update would go into
+the production backups. There has also been the idea of a ~dev~ stage which can
+read from ~acceptance~ and backup into ~dev~. This concept does currently miss a
+distinction between "production" data and "test" data. The naive staging
+currently allows data from "production" to end up in "dev".
+
+Current settings from the config map:
+
+#+begin_src yaml
+  cluster_revision: "1"
+  cluster_bootstrap_mode: restore
+  cluster_bootstrap_revision: "28"
+  cluster_bootstrap_revision_vault: "1"
+  cluster_bootstrap_revision_certificates: null
+
+  cluster_backup_env: dev
+  cluster_restore_env: acceptance
+  cluster_restore_certificates_env: dev
+
+  cnpg_backup_base_path: dev-cnpg
+  cnpg_restore_base_path: acceptance-cnpg
+  #+end_src
+
+
+***** Conclusion
+
+Keep as-is for now, to allow the split to be finished first. Afterwards this
+will have to be re-worked.
+
+**** Flux usage
+
+***** Overview
+
+The current setup is based on the idea that a Flux Kustomization is deployed per
+"thing": Typically this is the application, often also one for the application
+and one per needed dependency like volumes or database services.
+
+This Kustomization points into a path within the source repository (The cluster
+repository with the included submodule) and renders the content via Kustomize.
+
+Most applications use a Helm chart. A Flux HelmChart object is deployed from
+within the Kustomize folder so that Flux will eventually use Helm to deploy the
+chart.
+
+Kustomize is used for post processing of the Helm chart itself when needed.
+
+***** Adjusting configuration of a part
+
+The cluster instance has to decide which parts to include. This means there has
+to be a pointer from the cluster instance into ~business-operations~ via
+Kustomize.
+
+Example fragment:
+
+#+begin_src yaml
+  ---
+  apiVersion: kustomize.config.k8s.io/v1beta1
+  kind: Kustomization
+  resources:
+    - ../../../external/business-operations/kubernetes/apps/database
+    - ../../../external/business-operations/kubernetes/base-apps/network/ns
+    - ../../../external/business-operations/kubernetes/apps/network
+#+end_src
+
+These directories will typically deploy a Flux Kustomization which then again
+points into the ~business-operations~ directory.
+
+This approach makes adjustments difficult. Either the above Kustomization would
+have to patch the generated Flux Kustomization, so that it either points into a
+different path or so that it contains patches to tweak the generated resources.
+Or the alternative would be to copy the Flux Kustomization into the cluster's
+repository and adjust it there.
+
+****** Example using a copy of the Flux Kustomization
+
+From the Forgejo experiment:
+
+#+begin_src yaml
+  apiVersion: kustomize.toolkit.fluxcd.io/v1
+  kind: Kustomization
+  metadata:
+    name: cluster-apps-forgejo-db
+    namespace: flux-system
+  spec:
+    # NOTE: Some content left out
+    patches:
+      - patch: |
+          - op: replace
+            path: /spec/externalClusters/0/barmanObjectStore/serverName
+            value: db-rev1
+          - op: remove
+            path: /spec/backup
+        target:
+          kind: Cluster
+    postBuild:
+      substitute:
+        cnpg_restore_base_path: "dev-cnpg"
+        cluster_bootstrap_revision: "1"
+#+end_src
+
+This example removes the backup completely for experimentation and tweaks a few
+of the cluster settings via ~postBuild.substitute~.
+
+This is difficult to understand and difficult to test locally. ~flux build~ does
+allow to do this, but it is very tricky.
+
+Most likely it would have been better to patch the ~path~ instead already via
+Kustomize so that it points into the cluster's repository.
+
+****** Using Kustomize from within the cluster's repository
+
+The adjustments can be done from within the cluster's repository directly on the
+Kustomize layer when changing the path.
+
+The following example shows a few tweaks applied to the default setup of the
+ingress controller:
+
+#+begin_src yaml
+  apiVersion: kustomize.config.k8s.io/v1beta1
+  kind: Kustomization
+  namespace: network
+  resources:
+    - ../../../../../external/business-operations/kubernetes/base-apps/network/ingress-nginx/app
+
+  patches:
+    - target:
+        kind: HelmRelease
+        name: ingress-nginx
+      patch: |
+        # NOTE: Needed when there is no LoadBalancer support for the cluster.
+        - op: add
+          path: /spec/values/controller/service/type
+          value: NodePort
+        # NOTE: Disable Authelia
+        - op: remove
+          path: /spec/values/controller/config/global-auth-url
+#+end_src
+
+This Kustomization adjusts the Flux level HelmRelease, if tweaks to the
+generated manifests would be needed, then the patch would have to add post
+processing into the HelmRelease instance. This again would be difficult to
+understand.
+
+During the experiments there was no way to test out what the result of the Helm
+chart deployment would look like without going though the cluster.
+
+***** Conclusion
+
+For now this will stay as-is, accepting the fragility and complexity so that the
+split can be finished first.
+
+The observed problems indicate that an alternative approach which can be
+rendered without the cluster directly on the CLI would be valuable.
+
+It also indicates that the structure is not quite right yet for a situation
+where there is a shared code which is then used from within an cluster
+repository.
+
+**** Variable substitution
+
+This did just work also with the split. The way how it works is not easy to
+understand though. The first Flux Kustomization applies patches to all other
+Flux Kustomizations so that they will apply both the variable substitution and
+also the patching if they render new Flux Kustomizations.
+
+***** Conclusion
+
+For now this will stay. Special needs which require tweaking per part can be
+satisfied based on the approaches found in the Forgejo tests.
+
+Long term this should be improved. This may solve itself in case Flux would be
+replaced by a CLI tool.
+
+**** Kustomize
+
+The usage of Kustomize within the current ~b-ops~ repository is not structured
+in a way so that it would leverage Kustomize's features fully.
+
+There is a bit of a challenge to discover these features due to the
+documentation of Kustomize being not fully up to date and a bit scattered. Some
+aspects can only be found through the examples within the repository.
+
+***** Discovered resources online
+
+There were quite a few suggestions from the community online, regarding
+Kustomize the following is relevant:
+
+- https://git.shivering-isles.com/shivering-isles/infrastructure-gitops/-/tree/main/shared/components?ref_type=heads
+
+***** Conclusion
+
+Where applicable and needed aim to improve the Kustomize setup, so that
+adjustments per cluster instance are easier.
+
+The Forgejo experiments found that using annotations may help to configure
+components like the database backup and restore.
+
+Potentially also the local configuration annotation could be useful together
+with the config map generator to make cluster wide configuration available on
+the Kustomize layer and allow to merge into this configuration from an overlay.
+This has not been tried yet.
+
+
 *** Backup / Restore handling
 
 **** Volumes
