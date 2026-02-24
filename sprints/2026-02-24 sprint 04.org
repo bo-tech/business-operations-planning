@@ -4,14 +4,18 @@ Started: 2026-02-24
 
 ** Plan
 
-- [ ] Prepare nearly empty acceptance cluster
-  - Second instance of the production deployment
+- [X] Prepare nearly empty acceptance cluster
+- [ ] Propose microvm.nix fix upstream
+- [ ] Consider: Caching proxy into the loop, the image pull is slowing things
+  down substantially.
+  - maybe turn the existing fragments into a re-usable component
 - [ ] Deploy the system into it
 - [ ] Consider: Add the first simple applications, like hajimari
 - [ ] Add base apps, up to the point where echo-server works to verify the base
   infrastructure.
   - This will need also the Authelia part.
 - [ ] Plan out the remaining steps
+- [ ] Consider: Small utility like ~microvm-rebuild~ or so to ease the deployment.
 
 ** Focus
 
