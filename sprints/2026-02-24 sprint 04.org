@@ -1,0 +1,31 @@
+* Sprint 4: Complete b-ops to business-operations Split
+
+Started: 2026-02-24
+
+** Plan
+
+- [ ] Prepare nearly empty acceptance cluster
+  - Second instance of the production deployment
+- [ ] Deploy the system into it
+- [ ] Consider: Add the first simple applications, like hajimari
+- [ ] Add base apps, up to the point where echo-server works to verify the base
+  infrastructure.
+  - This will need also the Authelia part.
+- [ ] Plan out the remaining steps
+
+** Focus
+
+Complete the extraction of reusable platform code from ~b-ops~ into
+~business-operations~, making ~b-ops~ a thin private overlay that consumes the
+public platform.
+
+** Checkpoint
+
+"Is ~b-ops~ now a thin overlay consuming ~business-operations~, with all
+reusable platform code extracted?"
+
+** Notes
+
+** Learnings and Insights
+
+** Closing Status
