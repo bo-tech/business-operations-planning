@@ -44,29 +44,18 @@ Started: 2026-02-14
 - [X] review - The Flux Kustomization points to the Git Repository by name,
   consider to replace by a better value than the current ~bv-ops-kubernetes~.
   - not a big issue now, can be done after the splitting
-- [ ] --- refine below this point
-- [ ] Update ~demo-ops~ or provide builtin ~dev-env~ for ~business-operations~
-- [ ] review - The namespace handling is odd, compare ~network~ which requires
-  ~base-apps~ when keeping the original structure.
-- [ ] update and re-run full demo-ops cluster
-- [ ] Consider: Create a second internal repository for ~business-operations~ in
+- [X] Prepare test deployment based on virtual machines
+- [X] Consider: Create a second internal repository for ~business-operations~ in
   the internal Gitea
-- [ ] Experiment: explore multi-repo approaches for Flux/Kustomize layer
-- [ ] Experiment: try out most promising approaches with VolSync
+  - not needed for now, using submodules at the moment avoids this need
+- [X] Experiment: explore multi-repo approaches for Flux/Kustomize layer
+- [X] Experiment: try out most promising approaches with VolSync
   templates
-- [ ] Experiment: explore Taskfile pattern for cluster tasks (push to
-  internal Gitea)
-- [ ] Document findings and decide on the approach
+- [X] Document findings and decide on the approach
 
 ** Review and Backlog
 
-- [ ] Dependency pinning for ~ansible~, ~nixos~ and ~kubernetes~.
-  - Ideally this should use the same mechanism.
-- [ ] Usage of *Ansible*. If the inventory is maintained in Nix already, then it
-  may be possible to replace the Ansible setup with simple scripts and have one
-  tool less in the chain.
-- [ ] Usage of *Kluctl*. Both bootstrap and also the FluxCD part could be
-  simplified using Kluctl and a push based approach.
+All moved into backlog.
 
 ** Focus
 
