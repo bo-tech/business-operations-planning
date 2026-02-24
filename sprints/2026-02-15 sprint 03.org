@@ -680,3 +680,32 @@ As a workaround either copy the list or use the JSON patches instead.
 
 
 ** Closing Status
+
+Outcome:
+- Kubernetes layer extraction experimentally validated end-to-end.
+- Dev cluster fully deployable from the split setup via minikube.
+- Demo cluster deferred (ADR-0003: complete full split first).
+- Acceptance cluster stood up on microVMs (ADR-0018).
+
+What works:
+- Submodule integration for all layers (nixos, ansible, kubernetes).
+- Flux variable substitution carries through the split.
+- Kluctl for bootstrap (templating, SOPS support).
+- Backup/restore via Kustomize components (volumes and databases).
+
+What needs improvement:
+- Flux Kustomization patching across repos is fragile and hard to test locally.
+- No way to render Helm chart results without a running cluster.
+- Backup/restore revision handling is complex and error-prone.
+- Dependency management across layers is manual.
+
+Key insights:
+- A CLI-based rendering tool would improve the development workflow.
+- Kustomize components work well for cross-cutting concerns.
+- The structure is not fully settled — doing the full split first will
+  surface further refinements.
+
+Stats:
+- Started: 2026-02-15
+- Closed: 2026-02-24
+- Duration: 10 days
