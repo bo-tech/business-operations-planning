@@ -5,17 +5,21 @@ Started: 2026-02-24
 ** Plan
 
 - [X] Prepare nearly empty acceptance cluster
-- [ ] Propose microvm.nix fix upstream
-- [ ] Consider: Caching proxy into the loop, the image pull is slowing things
+- [X] Propose microvm.nix fix upstream
+- [X] Caching proxy into the loop, the image pull is slowing things
   down substantially.
-  - maybe turn the existing fragments into a re-usable component
-- [ ] Deploy the system into it
+  - [X] Create a Kustomize based deployment
+  - [X] Deploy
+  - [X] Provide a CA for the proxy's ssl handling
+  - [X] Integrate CA with test machines to use the proxy
+- [X] Deploy the system into it (FluxCD / Gitea up)
 - [ ] Consider: Add the first simple applications, like hajimari
 - [ ] Add base apps, up to the point where echo-server works to verify the base
   infrastructure.
   - This will need also the Authelia part.
 - [ ] Plan out the remaining steps
 - [ ] Consider: Small utility like ~microvm-rebuild~ or so to ease the deployment.
+- [ ] publish caching proxy repository
 
 ** Focus
 
@@ -31,5 +35,31 @@ reusable platform code extracted?"
 ** Notes
 
 ** Learnings and Insights
+
+*** Caching / Data transfer
+
+**** Issue
+
+Fast iterations on the cluster bootstrap were pailful because of the re-download
+of the container images. The Nix part for the frequent system rebuild was
+unproblematic, cached in the local machine's nix store and on the microvm hosts'
+stores as well.
+
+Putting a cache per type of artifact is substantial work.
+
+**** Squid cache as http proxy
+
+Using squid cache as a http proxy with ssl mitm support did allow to capture
+most of the traffic from container image blobs. A full re-deployment of the
+empty acceptance cluster did use around 250 MB of traffic in total, without even
+accounting for other unrelated traffic during the measuring period.
+
+Only challenge is that many requests use signing via HTTP get parameters, so
+that by default a cache would never hit.
+
+Squid has helpers to do URL manipulation which did allow to solve this problem.
+
+Long term it would be nicer to have a smarter caching setup, for now this is
+good enough for anything http related.
 
 ** Closing Status
