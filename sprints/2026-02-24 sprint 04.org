@@ -62,4 +62,17 @@ Squid has helpers to do URL manipulation which did allow to solve this problem.
 Long term it would be nicer to have a smarter caching setup, for now this is
 good enough for anything http related.
 
+*** Helm via Flux slows iteration
+
+HelmRelease actions (install/upgrade) hold a lock for the full timeout duration
+(15 minutes in our case). If something goes wrong mid-action, there is no way to
+force-cancel it — suspend/resume only takes effect after the current action
+finishes. The only workaround is deleting Helm's internal lock secret.
+
+This makes the fast iteration cycle of "fix, push, observe" painful compared to
+plain kustomize or Kluctl where applying is immediate and idempotent. Especially
+during bootstrap and restore scenarios where rapid debugging is needed.
+
+Reinforces the long-term preference for Kluctl.
+
 ** Closing Status
