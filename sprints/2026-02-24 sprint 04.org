@@ -13,7 +13,9 @@ Started: 2026-02-24
   - [X] Provide a CA for the proxy's ssl handling
   - [X] Integrate CA with test machines to use the proxy
 - [X] Deploy the system into it (FluxCD / Gitea up)
-- [ ] Consider: Add the first simple applications, like hajimari
+- [X] Consider: Add the first simple applications, like hajimari
+  - sipped, need the base apps anyway
+- [ ] Restore base apps
 - [ ] Add base apps, up to the point where echo-server works to verify the base
   infrastructure.
   - This will need also the Authelia part.
