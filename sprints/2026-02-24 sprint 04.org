@@ -15,7 +15,8 @@ Started: 2026-02-24
 - [X] Deploy the system into it (FluxCD / Gitea up)
 - [X] Consider: Add the first simple applications, like hajimari
   - sipped, need the base apps anyway
-- [ ] Restore base apps
+- [X] Restore base apps into the test setup first
+- [X] Consider to add a "restore-only" mode without backup enabled for development
 - [ ] Add base apps, up to the point where echo-server works to verify the base
   infrastructure.
   - This will need also the Authelia part.
