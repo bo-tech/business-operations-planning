@@ -17,10 +17,16 @@ Started: 2026-02-24
   - sipped, need the base apps anyway
 - [X] Restore base apps into the test setup first
 - [X] Consider to add a "restore-only" mode without backup enabled for development
-- [ ] Add base apps, up to the point where echo-server works to verify the base
+- [X] Add base apps, up to the point where echo-server works to verify the base
   infrastructure.
   - This will need also the Authelia part.
-- [ ] Plan out the remaining steps
+  - [X] bootstrap
+  - [X] flux up and running
+- [ ] Move the CRDs
+- [ ] Move the flux deployment itself out ~flux~
+- [ ] Move the repositories
+- [ ] Plan out the remaining steps ~base-apps~
+- [ ] Plan out the remaining steps ~apps~
 - [ ] Consider: Small utility like ~microvm-rebuild~ or so to ease the deployment.
 - [ ] publish caching proxy repository
 
