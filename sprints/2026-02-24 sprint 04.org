@@ -22,8 +22,8 @@ Started: 2026-02-24
   - This will need also the Authelia part.
   - [X] bootstrap
   - [X] flux up and running
-- [ ] Move the CRDs
-- [ ] Move the flux deployment itself out ~flux~
+- [X] Move the CRDs
+- [X] Move the flux deployment itself out ~flux~
 - [ ] Move the repositories
 - [ ] Plan out the remaining steps ~base-apps~
 - [ ] Plan out the remaining steps ~apps~
