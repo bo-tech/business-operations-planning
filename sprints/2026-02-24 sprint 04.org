@@ -64,7 +64,7 @@ Started: 2026-02-24
     current form.
 - [X] Move ~planning~ to codeberg org
 - [X] Move ~business-operations~ to codeberg org
-- [ ] Testrun via the acceptance deployment
+- [X] Testrun via the acceptance deployment
 
 ** Focus
 
@@ -121,3 +121,43 @@ during bootstrap and restore scenarios where rapid debugging is needed.
 Reinforces the long-term preference for Kluctl.
 
 ** Closing Status
+
+Outcome:
+- Full split of ~b-ops~ into ~business-operations~ (public) and ~b-ops~ (thin
+  private overlay) completed.
+- All base-apps and apps migrated, wired, and tested on acceptance cluster.
+- Acceptance cluster fully deployed from the split setup.
+- Project home moved to Codeberg (~business-operations~ org).
+
+What works:
+- ConfigMapGenerator pattern for Helm values extraction and site overlays.
+- ADR-0022 kustomization.yaml at every level for flexible inclusion.
+- Site overlay pattern with Flux Kustomization path patches.
+- Caching proxy (ci-cache) dramatically reduces re-deployment bandwidth.
+- VolSync backup/restore across production and acceptance clusters.
+- Authelia with split access-control configuration (base + site overlay via
+  ConfigMap key replacement).
+
+What needs improvement:
+- Caching proxy causes issues with the GitLab registry after roughly a day;
+  apart from that it works very well.
+- Authelia does not merge ~access_control~ across multiple config files;
+  required restructuring to single-file approach with ConfigMap key override.
+- Helm via Flux lock timeouts still slow iteration during debugging.
+
+Key insights:
+- Authelia loads config files alphabetically but replaces (not merges) sections
+  like ~access_control.rules~. Site-specific overrides must replace the full
+  section via a single file.
+- ConfigMap hash suffixes with ~name-reference.yaml~ enable automatic pod
+  restarts on config changes without manual intervention.
+- The split surfaced several implicit configuration assumptions that needed
+  explicit handling in the overlay pattern. Examples: a ~subPath~ volume mount
+  that only exposed one ConfigMap key (hiding the site overlay file), and a
+  single-file ConfigMap that needed to become a directory mount to support
+  base + overlay config files.
+
+Stats:
+- Started: 2026-02-24
+- Closed: 2026-03-01
+- Duration: 6 days
