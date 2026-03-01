@@ -8,8 +8,9 @@ Started: 2026-03-01
 - [ ] Wire ~demo-ops~ Kubernetes layer to ~business-operations~ via submodule
 - [ ] Get Flux bootstrap working in ~demo-ops~ (Gitea + Flux self-management)
 - [ ] Deploy a minimal set of apps via Flux (echo-server as smoke test)
-- [ ] Improve key generation and secrets handling for ~demo-ops~
+- [ ] Decide which apps to put into ~demo-ops~ by default for a start
 - [ ] Extract public documentation from ~b-ops~ to ~business-operations~
+- [ ] Improve key generation and secrets handling for ~demo-ops~
 - [ ] Write getting-started documentation in ~business-operations~
 - [ ] Verify full deploy-from-scratch flow on a fresh VM
 
