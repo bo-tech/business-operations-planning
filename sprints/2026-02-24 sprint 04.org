@@ -59,10 +59,10 @@ Started: 2026-02-24
   - Candidates: codeberg.org
   - Using codeberg.org, org ~business-operations~
   - https://codeberg.org/business-operations
-- [ ] Move ~apps~: mayan-edms (botech, private, test instances)
+- [X] Move ~apps~: mayan-edms (botech, private, test instances)
   - Tricky, the naming is not easy to handle from a default instance in the
     current form.
-- [ ] Consider: Small utility like ~microvm-rebuild~ or so to ease the deployment.
+- [ ] Testrun via the acceptance deployment
 
 ** Next sprint tasks
 
