@@ -52,10 +52,22 @@ Started: 2026-02-24
 - [X] Enable ~apps~: authelia in business-operations
 - [X] publish caching proxy repository
   - https://codeberg.org/johbo/ci-cache
+- [X] Dependency pinning for ~ansible~, ~nixos~ and ~kubernetes~.
+  - Ideally this should use the same mechanism.
+  - solved by using a submodule for now. This is not perfect, yet it is good enough.
+- [X] Decide about the right home for the project
+  - Candidates: codeberg.org
+  - Using codeberg.org, org ~business-operations~
+  - https://codeberg.org/business-operations
 - [ ] Move ~apps~: mayan-edms (botech, private, test instances)
   - Tricky, the naming is not easy to handle from a default instance in the
     current form.
 - [ ] Consider: Small utility like ~microvm-rebuild~ or so to ease the deployment.
+
+** Next sprint tasks
+
+- [ ] Move ~planning~ to codeberg org
+- [ ] Move ~business-operations~ to codeberg org
 
 ** Focus
 
