@@ -62,12 +62,9 @@ Started: 2026-02-24
 - [X] Move ~apps~: mayan-edms (botech, private, test instances)
   - Tricky, the naming is not easy to handle from a default instance in the
     current form.
+- [X] Move ~planning~ to codeberg org
+- [X] Move ~business-operations~ to codeberg org
 - [ ] Testrun via the acceptance deployment
-
-** Next sprint tasks
-
-- [ ] Move ~planning~ to codeberg org
-- [ ] Move ~business-operations~ to codeberg org
 
 ** Focus
 
