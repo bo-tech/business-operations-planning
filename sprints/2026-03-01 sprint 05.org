@@ -1,0 +1,29 @@
+* Sprint 5: Make demo-ops Usable for Others
+
+Started: 2026-03-01
+
+** Plan
+
+- [ ] Update ~demo-ops~ flake input to Codeberg URL
+- [ ] Wire ~demo-ops~ Kubernetes layer to ~business-operations~ via submodule
+- [ ] Get Flux bootstrap working in ~demo-ops~ (Gitea + Flux self-management)
+- [ ] Deploy a minimal set of apps via Flux (echo-server as smoke test)
+- [ ] Improve key generation and secrets handling for ~demo-ops~
+- [ ] Write getting-started documentation in ~business-operations~
+- [ ] Verify full deploy-from-scratch flow on a fresh VM
+
+** Focus
+
+Make ~demo-ops~ a complete, working example that someone else can follow
+to deploy a single-node cluster with applications.
+
+** Checkpoint
+
+"Can a new user clone ~demo-ops~, follow the docs, and get a working
+cluster with at least one application running?"
+
+** Notes
+
+** Learnings and Insights
+
+** Closing Status
