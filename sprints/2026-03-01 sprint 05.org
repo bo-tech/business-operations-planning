@@ -9,6 +9,7 @@ Started: 2026-03-01
 - [ ] Get Flux bootstrap working in ~demo-ops~ (Gitea + Flux self-management)
 - [ ] Deploy a minimal set of apps via Flux (echo-server as smoke test)
 - [ ] Improve key generation and secrets handling for ~demo-ops~
+- [ ] Extract public documentation from ~b-ops~ to ~business-operations~
 - [ ] Write getting-started documentation in ~business-operations~
 - [ ] Verify full deploy-from-scratch flow on a fresh VM
 
