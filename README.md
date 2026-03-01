@@ -13,7 +13,7 @@ This repository contains:
 ## Related Repositories
 
 - **b-ops**: Production infrastructure (private)
-- **[business-operations](https://github.com/bo-tech/business-operations)**: Public open-source target
+- **[business-operations](https://codeberg.org/business-operations/business-operations)**: Public open-source target
 
 
 ## Contact

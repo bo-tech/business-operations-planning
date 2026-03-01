@@ -258,5 +258,5 @@ Roles and playbooks extracted to `business-operations/ansible/`. Helm roles
 parameterized with configurable paths (defaulting to cluster-0 as reference).
 b-ops ansible directory reduced to inventories and artifacts only.
 
-Consuming repositories use `nix develop github:bo-tech/business-operations#ansible`
+Consuming repositories use `nix develop git+https://codeberg.org/business-operations/business-operations#ansible`
 which provides tools and sets `ANSIBLE_ROLES_PATH` and `BO_PLAYBOOKS`.
