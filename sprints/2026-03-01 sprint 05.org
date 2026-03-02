@@ -13,6 +13,9 @@ Started: 2026-03-01
 - [ ] Improve key generation and secrets handling for ~demo-ops~
 - [ ] Write getting-started documentation in ~business-operations~
 - [ ] Verify full deploy-from-scratch flow on a fresh VM
+- [ ] Extract public documentation to `business-operations`
+- [ ] Build and publish documentation
+- [ ] Consider submitting hardware modules to nixos-hardware
 
 ** Focus
 
@@ -25,6 +28,9 @@ to deploy a single-node cluster with applications.
 cluster with at least one application running?"
 
 ** Notes
+
+*** Deployment targets
+
 
 ** Learnings and Insights
 
