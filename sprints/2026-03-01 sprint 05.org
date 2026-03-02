@@ -4,7 +4,11 @@ Started: 2026-03-01
 
 ** Plan
 
-- [ ] Update ~demo-ops~ flake input to Codeberg URL
+- [X] Update ~demo-ops~ flake input to Codeberg URL
+- [X] Refactor ~demo-ops~ and add an abstraction module to simplify configuration
+- [ ] Test deploy
+- [ ] Deployment via microvm.nix possible
+  - This is only one option, pre-existing machine should be the default
 - [ ] Wire ~demo-ops~ Kubernetes layer to ~business-operations~ via submodule
 - [ ] Get Flux bootstrap working in ~demo-ops~ (Gitea + Flux self-management)
 - [ ] Deploy a minimal set of apps via Flux (echo-server as smoke test)
@@ -16,6 +20,7 @@ Started: 2026-03-01
 - [ ] Extract public documentation to `business-operations`
 - [ ] Build and publish documentation
 - [ ] Consider submitting hardware modules to nixos-hardware
+- [ ] review - Start test suite to check fitness of a deployed system
 
 ** Focus
 
